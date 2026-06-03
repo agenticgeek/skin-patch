@@ -15,7 +15,7 @@ export default function Footer() {
           aux recommandations des professionnels de santé.
         </p>
         <div className="footer-meta">
-          <span>© METCARE® — My Esthetic Travel®</span>
+          <span>© 2026 METCARE® — My Esthetic Travel®</span>
           <span>Recovery Lifestyle Innovation™</span>
         </div>
       </div>
