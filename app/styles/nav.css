@@ -1,0 +1,237 @@
+/* ============================================================
+   Topbar + mobile / tablet navigation
+   ============================================================ */
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+body.nav-open {
+  overflow: hidden;
+}
+
+/* Desktop inline links (legacy slot — hidden on small screens) */
+.topbar-right {
+  display: none;
+}
+
+.topbar-menu-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  margin: 0;
+  padding: 0;
+  border: 1px solid rgba(43, 21, 23, 0.12);
+  border-radius: 12px;
+  background: rgba(236, 235, 233, 0.65);
+  cursor: pointer;
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.25s var(--ease-cinematic);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.topbar-menu-icon,
+.topbar-menu-icon::before,
+.topbar-menu-icon::after {
+  display: block;
+  width: 18px;
+  height: 2px;
+  border-radius: 2px;
+  background: currentColor;
+  transition:
+    transform 0.35s var(--ease-cinematic),
+    opacity 0.25s ease;
+}
+
+.topbar-menu-icon {
+  position: relative;
+  color: var(--cherry);
+}
+
+.topbar-menu-icon::before,
+.topbar-menu-icon::after {
+  content: "";
+  position: absolute;
+  left: 0;
+}
+
+.topbar-menu-icon::before {
+  top: -6px;
+}
+
+.topbar-menu-icon::after {
+  top: 6px;
+}
+
+.topbar--open .topbar-menu-icon {
+  background: transparent;
+}
+
+.topbar--open .topbar-menu-icon::before {
+  top: 0;
+  transform: rotate(45deg);
+}
+
+.topbar--open .topbar-menu-icon::after {
+  top: 0;
+  transform: rotate(-45deg);
+}
+
+.topbar-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 48;
+  background: rgba(27, 38, 59, 0.45);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+}
+
+.topbar--open .topbar-backdrop {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.topbar-nav {
+  position: fixed;
+  inset: 0;
+  z-index: 49;
+  pointer-events: none;
+}
+
+.topbar-nav__panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: min(100%, 320px);
+  height: 100%;
+  max-height: 100dvh;
+  padding:
+    max(88px, calc(env(safe-area-inset-top, 0px) + 72px))
+    max(24px, env(safe-area-inset-right, 0px))
+    max(28px, env(safe-area-inset-bottom, 0px))
+    max(24px, env(safe-area-inset-left, 0px));
+  background: linear-gradient(
+    165deg,
+    rgba(255, 255, 255, 0.98) 0%,
+    var(--snow) 55%,
+    color-mix(in srgb, var(--beige) 35%, var(--snow)) 100%
+  );
+  border-left: 1px solid rgba(43, 21, 23, 0.1);
+  box-shadow: -24px 0 64px rgba(43, 21, 23, 0.18);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  transform: translateX(105%);
+  transition: transform 0.45s var(--ease-cinematic);
+  pointer-events: auto;
+}
+
+.topbar--open .topbar-nav__panel {
+  transform: translateX(0);
+}
+
+.topbar-nav__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.topbar-nav__list a,
+.topbar-nav__list .topbar-nav__muted {
+  display: block;
+  font-family: "Raleway", sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--cherry);
+  text-decoration: none;
+  padding: 14px 16px;
+  border-radius: 12px;
+  transition:
+    background 0.25s ease,
+    color 0.25s ease;
+}
+
+.topbar-nav__list a:hover,
+.topbar-nav__list a:focus-visible {
+  background: rgba(106, 136, 164, 0.12);
+  outline: none;
+}
+
+.topbar-nav__cta {
+  font-family: "Poppins", sans-serif !important;
+  font-weight: 700 !important;
+  background: var(--cherry) !important;
+  color: var(--snow) !important;
+  text-align: center;
+  margin-top: 8px;
+}
+
+.topbar-nav__cta:hover {
+  background: var(--cherry-hover) !important;
+}
+
+.topbar-nav__muted {
+  opacity: 0.55;
+  font-size: 11px !important;
+  line-height: 1.5;
+  padding-top: 10px !important;
+}
+
+/* Checkout / thank you pages */
+.topbar--checkout .topbar-menu-btn,
+.topbar--thankyou .topbar-menu-btn {
+  border-color: rgba(43, 21, 23, 0.14);
+  background: rgba(255, 255, 255, 0.75);
+}
+
+/* Tablet + desktop: show inline nav, hide drawer trigger */
+@media (min-width: 900px) {
+  .topbar-menu-btn {
+    display: none;
+  }
+
+  .topbar-backdrop,
+  .topbar-nav {
+    display: none;
+  }
+
+  .topbar-right {
+    display: flex;
+    gap: 18px;
+    align-items: center;
+    font-family: "Raleway", sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--cherry);
+  }
+
+  .topbar-right a {
+    opacity: 0.7;
+    transition: opacity 0.25s ease;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .topbar-right a:hover {
+    opacity: 1;
+  }
+}

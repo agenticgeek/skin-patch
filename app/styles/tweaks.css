@@ -1,0 +1,75 @@
+/* ============================================================
+   METCARE® — Tweak overrides
+   All tweak-controlled CSS lives here. Reads CSS vars + body
+   data attributes set by js/tweaks-app.jsx.
+   ============================================================ */
+
+/* ----- Hero scale + heading weight ----- */
+.hero-title {
+  font-weight: var(--tw-heading-weight, 700) !important;
+}
+.hero-title .line {
+  font-size: calc(clamp(54px, 14vw, 220px) * var(--tw-hero-scale, 1)) !important;
+}
+.section-head h2,
+.section-head .section-title {
+  font-weight: var(--tw-heading-weight, 700) !important;
+}
+
+/* ----- Aurora intensity + speed ----- */
+.aurora {
+  opacity: var(--tw-aurora-opacity, 0.65);
+}
+.bg-aurora {
+  opacity: calc(var(--tw-aurora-opacity, 0.65) * 0.48);
+}
+.aurora .blob,
+.bg-aurora .blob {
+  animation-duration: var(--tw-aurora-speed, 28s);
+}
+/* Add subtle desync to siblings */
+.aurora .b2, .bg-aurora .b2 { animation-duration: calc(var(--tw-aurora-speed, 28s) * 1.20); }
+.aurora .b3, .bg-aurora .b3 { animation-duration: calc(var(--tw-aurora-speed, 28s) * 1.45); }
+.aurora .b4               { animation-duration: calc(var(--tw-aurora-speed, 28s) * 1.13); }
+
+/* ----- Toggles via body classes ----- */
+body.tw-no-marquee .hero-rail { display: none !important; }
+body.tw-no-ticker .ticker { display: none !important; }
+body.tw-no-stagger .stagger-child,
+body.tw-no-stagger .rise-item,
+body.tw-no-stagger .section-head .section-title .line {
+  opacity: 1 !important;
+  transform: none !important;
+  clip-path: inset(0 0 0 0) !important;
+  transition: none !important;
+}
+body.tw-no-stagger .rise-item.is-in,
+body.tw-no-stagger .ic-card.in,
+body.tw-no-stagger .tilt-card.in {
+  opacity: 1 !important;
+  transform: none !important;
+}
+body.tw-no-zoom section.scene > .container {
+  transform: none !important;
+  opacity: 1 !important;
+  filter: none !important;
+}
+body.tw-no-zoom section.scene::after { transform: scaleX(0) !important; }
+
+body.tw-no-stagger .grid-motion-marquee__track {
+  animation: none !important;
+}
+
+/* ----- Background tone (overrides per-section bg) ----- */
+body[data-bg-theme="warm"]:not([data-section]) {
+  background: color-mix(in srgb, var(--beige) 28%, var(--snow)) !important;
+}
+body[data-bg-theme="warm"][data-section] {
+  background: color-mix(in srgb, var(--beige) 28%, var(--snow)) !important;
+}
+body[data-bg-theme="cool"][data-section] {
+  background: color-mix(in srgb, #c0d0e0 22%, var(--snow)) !important;
+}
+body[data-bg-theme="snow"][data-section] {
+  background: var(--snow) !important;
+}

@@ -1,0 +1,39 @@
+/* Next.js font variable overrides — METCARE® charte: Poppins + Raleway only */
+body {
+  font-family: var(--font-raleway), "Raleway", system-ui, -apple-system, sans-serif;
+}
+
+h1, h2, h3, h4, h5, .heading, .cta,
+.brand, .hero-title, .hero-eyebrow, .hero-attrs, .hero-tag,
+.card h3, .list-card .row .txt, .moment .txt,
+.why-benefit-name, .why-promise-txt, .ic-card-name, .ic .ic-name,
+.synergy-card .line, .vision-card h3, .vision-card .vlist .v-txt,
+.protocol-banner h3, .tilt-card h3, .hero-rail,
+.summary-row .name, .summary-total, .summary-cta,
+.trust, .bump-body h4, .upsell-card .name, .upsell-card .add,
+.ty-sub, .ty-order .row .name, .ty-order .total,
+.checkout-heading, .form-card h3, .wallet-btn,
+.ty-card h3, .ritual h3, .ritual .step .v {
+  font-family: var(--font-poppins), "Poppins", system-ui, sans-serif;
+}
+
+.hero-meta, .hero-num, .hero-scroll, .hero-sub-note,
+.section-head .num, .card .label, .card-label,
+.list-card .row .idx, .moment .glyph, .ritual .ritual-label,
+.ritual .step .n, .why-benefit-idx, .ic-card-idx, .ic .ic-idx,
+.synergy-card .lbl, .vision-card .v-num, .vision-card .vlist .v-idx,
+.protocol-banner .lbl, .tilt-card .num,
+.crumbs, .ph-banner, .bump-price, .summary-row .price,
+.summary-total .amt, .stripe-mock, .ty-eyebrow, .ty-session,
+.dev-note, .post-upsell .eyebrow, .upsell-card .ph-price,
+.section-media__label {
+  font-family: var(--font-raleway), "Raleway", system-ui, sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.hero-lede {
+  font-family: var(--font-raleway), "Raleway", system-ui, sans-serif;
+  font-weight: 300;
+}

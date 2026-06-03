@@ -1,0 +1,436 @@
+/* ============================================================
+   Grid motion scroll — optimized parallax + marquee
+   JS sets --gm-* via smoothed rAF (ScrollGridMotion.tsx)
+   ============================================================ */
+
+@property --gm-ty {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0px;
+}
+
+@property --gm-tx {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0px;
+}
+
+@property --gm-tz {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0px;
+}
+
+@property --gm-rx {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+@property --gm-ry {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+@property --gm-rotate {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+[data-grid-motion].grid-motion {
+  position: relative;
+  perspective: 1200px;
+  perspective-origin: 50% 42%;
+  transform-style: preserve-3d;
+  contain: layout style;
+  --gm-progress: 0;
+  --gm-focus: 0;
+  --gm-mx: 0;
+  --gm-my: 0;
+}
+
+[data-grid-motion].grid-motion--active {
+  contain: layout style paint;
+}
+
+/* Shared cell motion — GPU-friendly composite layer when active */
+[data-grid-motion].grid-motion--active .ic-card,
+[data-grid-motion].grid-motion--active .moment,
+[data-grid-motion].grid-motion--active .why-benefit,
+[data-grid-motion].grid-motion--active .synergy-item,
+[data-grid-motion].grid-motion--active .step,
+[data-grid-motion].grid-motion--active .card,
+[data-grid-motion].grid-motion--active .attr,
+[data-grid-motion].grid-motion--active .vrow {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+[data-grid-motion] .ic-card,
+[data-grid-motion] .moment,
+[data-grid-motion] .why-benefit,
+[data-grid-motion] .synergy-item,
+[data-grid-motion] .step,
+[data-grid-motion] .card,
+[data-grid-motion] .attr,
+[data-grid-motion] .vrow {
+  transform-style: preserve-3d;
+  --hover-lift: 0px;
+  --gm-ty: 0px;
+  --gm-tx: 0px;
+  --gm-tz: 0px;
+  --gm-rx: 0deg;
+  --gm-ry: 0deg;
+  --gm-rotate: 0deg;
+  transform: translate3d(
+      var(--gm-tx, 0px),
+      calc(var(--gm-ty, 0px) + var(--hover-lift, 0px)),
+      var(--gm-tz, 0px)
+    )
+    rotateX(var(--gm-rx, 0deg))
+    rotateY(var(--gm-ry, 0deg))
+    rotateZ(var(--gm-rotate, 0deg));
+}
+
+/* Softer hover — let scroll lerp handle motion, quick lift only */
+[data-grid-motion] .ic-card,
+[data-grid-motion] .moment,
+[data-grid-motion] .attr {
+  transition:
+    --hover-lift 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.35s ease,
+    box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    background 0.35s ease,
+    opacity 0.45s ease,
+    filter 0.45s ease;
+}
+
+[data-grid-motion] .ic-card:hover,
+[data-grid-motion] .ic-card:focus-visible {
+  --hover-lift: -5px;
+  z-index: 2;
+}
+
+@media (hover: hover) {
+  [data-grid-motion].ingredient-grid:has(.ic-card:hover) .ic-card:not(:hover) {
+    --hover-lift: 0px;
+    transform: translate3d(var(--gm-tx, 0px), var(--gm-ty, 0px), var(--gm-tz, 0px))
+      rotateX(var(--gm-rx, 0deg))
+      rotateY(var(--gm-ry, 0deg))
+      scale(0.985);
+    filter: saturate(0.88);
+    opacity: 0.92;
+  }
+}
+
+[data-grid-motion] .moment:hover {
+  --hover-lift: -2px;
+}
+
+[data-grid-motion] .attr:hover {
+  --hover-lift: -3px;
+}
+
+[data-grid-motion] #section-2 .list-card--luxe .row {
+  transform-style: preserve-3d;
+  --hover-lift: 0px;
+  transform: translate3d(
+      var(--gm-tx, 0px),
+      calc(var(--gm-ty, 0px) + var(--hover-lift, 0px)),
+      var(--gm-tz, 0px)
+    )
+    rotateX(var(--gm-rx, 0deg))
+    rotateY(var(--gm-ry, 0deg))
+    rotateZ(var(--gm-rotate, 0deg));
+}
+
+@media (hover: hover) {
+  [data-grid-motion] #section-2 .list-card--luxe .row:hover {
+    --hover-lift: -2px;
+  }
+}
+
+[data-grid-motion] .vrow:hover {
+  --hover-lift: -2px;
+}
+
+/* Recovery cards — scroll lerp + existing tilt */
+[data-grid-motion] .recovery-card {
+  transition:
+    opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.4s ease,
+    border-color 0.35s ease,
+    filter 0.45s ease;
+}
+
+[data-grid-motion] .recovery-card.rise-item:not(.is-in) {
+  transform: perspective(1000px)
+    rotateX(var(--tilt-x, 0deg))
+    rotateY(var(--tilt-y, 0deg))
+    translate3d(var(--gm-tx, 0), calc(48px + var(--gm-ty, 0px)), 0);
+}
+
+[data-grid-motion] .recovery-card.rise-item.is-in {
+  transform: perspective(1000px)
+    rotateX(calc(var(--tilt-x, 0deg) + var(--gm-rx, 0deg)))
+    rotateY(calc(var(--tilt-y, 0deg) + var(--gm-ry, 0deg)))
+    translate3d(var(--gm-tx, 0), var(--gm-ty, 0px), var(--gm-tz, 0px));
+}
+
+@media (hover: hover) {
+  [data-grid-motion].crosssell:has(.recovery-card:hover) .recovery-card:not(:hover) {
+    opacity: 0.58;
+    filter: saturate(0.75);
+  }
+}
+
+[data-grid-motion] .why-benefit {
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    background 0.3s ease,
+    border-color 0.3s ease;
+}
+
+[data-grid-motion] .why-benefit:hover {
+  transform: translate3d(var(--gm-tx, 0px), calc(var(--gm-ty, 0px) - 1px), 3px)
+    rotateX(var(--gm-rx, 0deg))
+    rotateY(var(--gm-ry, 0deg))
+    scale(1.015);
+}
+
+[data-grid-motion] .synergy-item {
+  transition:
+    border-color 0.25s ease,
+    background 0.25s ease;
+}
+
+[data-grid-motion] .synergy-item:hover {
+  --hover-lift: -2px;
+}
+
+/* Focus vignette */
+[data-grid-motion].grid-motion::before {
+  content: "";
+  position: absolute;
+  inset: -8% -4%;
+  pointer-events: none;
+  z-index: -1;
+  opacity: calc(var(--gm-focus, 0) * 0.28);
+  background: radial-gradient(
+    ellipse 70% 55% at 50% 45%,
+    rgba(106, 136, 164, 0.1),
+    transparent 70%
+  );
+  transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ============================================================
+   Infinite marquee — GPU translate3d, pause off-screen
+   ============================================================ */
+
+.grid-motion-marquee-band {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  content-visibility: auto;
+  contain-intrinsic-size: auto 120px;
+  border-top: 1px solid rgba(43, 21, 23, 0.08);
+  border-bottom: 1px solid rgba(43, 21, 23, 0.08);
+}
+
+.grid-motion-marquee {
+  width: 100%;
+  overflow: hidden;
+  padding: 12px 0;
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000 10%,
+    #000 90%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000 10%,
+    #000 90%,
+    transparent
+  );
+}
+
+.grid-motion-marquee--light {
+  background: linear-gradient(
+    90deg,
+    var(--snow) 0%,
+    color-mix(in srgb, var(--beige) 35%, var(--snow)) 50%,
+    var(--snow) 100%
+  );
+}
+
+.grid-motion-marquee--dark {
+  background: linear-gradient(
+    90deg,
+    var(--cherry) 0%,
+    color-mix(in srgb, var(--cherry) 75%, var(--silver-dark)) 50%,
+    var(--cherry) 100%
+  );
+}
+
+.grid-motion-marquee__track {
+  display: flex;
+  width: max-content;
+  gap: 10px;
+  padding: 0 10px;
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
+  animation-play-state: paused;
+}
+
+.grid-motion-marquee--left .grid-motion-marquee__track {
+  animation: grid-marquee-left 52s linear infinite;
+}
+
+.grid-motion-marquee--right .grid-motion-marquee__track {
+  animation: grid-marquee-right 48s linear infinite;
+}
+
+.grid-motion-marquee__chip {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 9px 20px;
+  border-radius: 999px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  border: 1px solid rgba(43, 21, 23, 0.09);
+  background: rgba(255, 255, 255, 0.78);
+  color: var(--cherry);
+  box-shadow: 0 6px 20px -14px rgba(43, 21, 23, 0.18);
+  transform: translate3d(0, 0, 0);
+  transition:
+    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.3s ease,
+    box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.grid-motion-marquee--dark .grid-motion-marquee__chip {
+  border-color: rgba(236, 235, 233, 0.1);
+  background: rgba(255, 255, 255, 0.055);
+  color: rgba(236, 235, 233, 0.9);
+  box-shadow: 0 6px 24px -12px rgba(0, 0, 0, 0.4);
+}
+
+@media (hover: hover) {
+  .grid-motion-marquee__chip:hover {
+    transform: translate3d(0, -2px, 0) scale(1.03);
+    border-color: var(--silver-blue);
+    box-shadow: 0 12px 28px -12px rgba(106, 136, 164, 0.3);
+  }
+
+  .grid-motion-marquee:hover .grid-motion-marquee__track {
+    animation-play-state: running;
+  }
+}
+
+@keyframes grid-marquee-left {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes grid-marquee-right {
+  from {
+    transform: translate3d(-50%, 0, 0);
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* ============================================================
+   Responsive & accessibility
+   ============================================================ */
+
+@media (max-width: 899px) {
+  [data-grid-motion].grid-motion {
+    perspective: 900px;
+  }
+
+  [data-grid-motion] #section-2 .card--luxe,
+  [data-grid-motion] #section-2 .list-card--luxe .row {
+    transition:
+      transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.35s ease,
+      border-color 0.3s ease,
+      background 0.3s ease;
+  }
+
+  [data-grid-motion] #section-6 .vrow {
+    transform: translate3d(0, var(--gm-ty, 0px), 0) !important;
+  }
+}
+
+@media (max-width: 899px) and (hover: none) {
+  [data-grid-motion] #section-6 .vrow {
+    transform: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  [data-grid-motion].grid-motion {
+    perspective: 800px;
+  }
+}
+
+@media (max-width: 640px) {
+  .grid-motion-marquee__chip {
+    font-size: 10px;
+    padding: 7px 14px;
+    letter-spacing: 0.14em;
+  }
+
+  .grid-motion-marquee--left .grid-motion-marquee__track {
+    animation-duration: 58s;
+  }
+
+  .grid-motion-marquee--right .grid-motion-marquee__track {
+    animation-duration: 54s;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .grid-motion-marquee__track {
+    animation: none !important;
+  }
+
+  [data-grid-motion] .ic-card,
+  [data-grid-motion] .moment,
+  [data-grid-motion] .recovery-card,
+  [data-grid-motion] .why-benefit,
+  [data-grid-motion] .synergy-item,
+  [data-grid-motion] .step,
+  [data-grid-motion] .card,
+  [data-grid-motion] .attr,
+  [data-grid-motion] .vrow {
+    transform: none !important;
+  }
+}
+
+body.tw-no-stagger [data-grid-motion] .ic-card,
+body.tw-no-stagger [data-grid-motion] .moment,
+body.tw-no-stagger [data-grid-motion] .recovery-card {
+  transform: none !important;
+}

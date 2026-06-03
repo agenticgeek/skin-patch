@@ -1,0 +1,42 @@
+/* Hero title — per-letter stretch on hover */
+
+.hero-title--stretch {
+  cursor: default;
+  user-select: none;
+}
+
+.hero-title--stretch .line {
+  white-space: nowrap;
+}
+
+.hero-title--stretch .hero-letter {
+  display: inline-block;
+  will-change: transform;
+  margin-right: -0.03em;
+  padding: 0 0.02em;
+}
+
+.hero-title--stretch .line .tm {
+  display: inline-block;
+  margin-left: 0.06em;
+  transform: none !important;
+  pointer-events: none;
+}
+
+@media (max-width: 640px) {
+  .hero-title--stretch .hero-letter {
+    margin-right: -0.02em;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-title--stretch .hero-letter {
+    will-change: auto;
+  }
+}
+
+@media (hover: none) {
+  .hero-title--stretch {
+    cursor: auto;
+  }
+}
