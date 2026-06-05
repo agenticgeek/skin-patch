@@ -2,8 +2,9 @@
 
 import type { MouseEvent } from "react";
 import FilmGrain from "@/components/ui/FilmGrain";
-import SectionMedia from "@/components/ui/SectionMedia";
 import SectionTitle from "@/components/ui/SectionTitle";
+import Image from "next/image";
+import img3 from "@/assets/3.png";
 
 const crossSellCards = [
   {
@@ -62,12 +63,20 @@ export default function CrossSellSection() {
         </header>
 
         <div className="section-stack">
-          <SectionMedia
-            aspect="wide"
-            tone="light"
-            label="// Visuel — protocole"
-            title="Gamme METCARE® · recovery protocol"
-          />
+          <figure className="section-media section-media--wide section-media--light rise-item">
+            <div className="section-media__frame">
+              <Image
+                src={img3}
+                alt="Gamme METCARE® · recovery protocol"
+                fill
+                style={{ objectFit: "cover" }}
+              />
+            </div>
+            <figcaption className="section-media__caption">
+              <span className="section-media__label">// Visuel — protocole</span>
+              <span className="section-media__title">Gamme METCARE® · recovery protocol</span>
+            </figcaption>
+          </figure>
 
         <article className="protocol-banner rise-item">
           <div className="protocol-banner-media" aria-hidden="true">
