@@ -1,6 +1,7 @@
 import FormulationAurora from "@/components/illustrations/FormulationAurora";
-import SectionMedia from "@/components/ui/SectionMedia";
 import SectionTitle from "@/components/ui/SectionTitle";
+import Image from "next/image";
+import imgSpec from "@/assets/SKIN RECOVERY PATCH.png";
 
 const ingredients = [
   {
@@ -100,12 +101,20 @@ export default function FormulationSection() {
             </div>
           </div>
 
-          <SectionMedia
-            aspect="portrait"
-            tone="beige"
-            label="// Visuel — formulation"
-            title="Texture sérum · actifs en lumière"
-          />
+          <figure className="section-media section-media--portrait section-media--beige rise-item">
+            <div className="section-media__frame">
+              <Image
+                src={imgSpec}
+                alt="Texture sérum · actifs en lumière"
+                fill
+                style={{ objectFit: "cover" }}
+              />
+            </div>
+            <figcaption className="section-media__caption">
+              <span className="section-media__label">// Visuel — formulation</span>
+              <span className="section-media__title">Texture sérum · actifs en lumière</span>
+            </figcaption>
+          </figure>
         </div>
 
         <article className="synergy-card-v2" aria-label="Synergie">

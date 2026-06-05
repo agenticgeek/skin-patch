@@ -1,6 +1,7 @@
 import ExperienceAurora from "@/components/illustrations/ExperienceAurora";
-import SectionMedia from "@/components/ui/SectionMedia";
 import SectionTitle from "@/components/ui/SectionTitle";
+import Image from "next/image";
+import img3 from "@/assets/3.png";
 
 export default function ExperienceSection() {
   return (
@@ -89,11 +90,20 @@ export default function ExperienceSection() {
             </blockquote>
           </div>
 
-          <SectionMedia
-            aspect="portrait"
-            label="// Visuel — expérience recovery"
-            title="Portrait lifestyle · application du patch"
-          />
+          <figure className="section-media section-media--portrait section-media--light rise-item">
+            <div className="section-media__frame">
+              <Image
+                src={img3}
+                alt="Portrait lifestyle · application du patch"
+                fill
+                style={{ objectFit: "cover" }}
+              />
+            </div>
+            <figcaption className="section-media__caption">
+              <span className="section-media__label">// Visuel — expérience recovery</span>
+              <span className="section-media__title">Portrait lifestyle · application du patch</span>
+            </figcaption>
+          </figure>
         </div>
       </div>
     </section>

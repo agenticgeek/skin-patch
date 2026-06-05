@@ -1,7 +1,8 @@
 import VisionSpheres from "@/components/illustrations/VisionSpheres";
 import FilmGrain from "@/components/ui/FilmGrain";
-import SectionMedia from "@/components/ui/SectionMedia";
 import SectionTitle from "@/components/ui/SectionTitle";
+import Image from "next/image";
+import img4 from "@/assets/4.png";
 
 const visionItems = [
   "plus sensorielle",
@@ -60,12 +61,20 @@ export default function VisionSection() {
             </div>
           </article>
 
-          <SectionMedia
-            aspect="portrait"
-            tone="dark"
-            label="// Visuel — expérience"
-            title="Ambiance spa · recovery lifestyle"
-          />
+          <figure className="section-media section-media--portrait section-media--dark rise-item">
+            <div className="section-media__frame">
+              <Image
+                src={img4}
+                alt="Ambiance spa · recovery lifestyle"
+                fill
+                style={{ objectFit: "cover" }}
+              />
+            </div>
+            <figcaption className="section-media__caption">
+              <span className="section-media__label">// Visuel — expérience</span>
+              <span className="section-media__title">Ambiance spa · recovery lifestyle</span>
+            </figcaption>
+          </figure>
         </div>
       </div>
     </section>

@@ -1,7 +1,9 @@
 import type { ReactNode } from "react";
 import RitualMouseAurora from "@/components/illustrations/RitualMouseAurora";
-import SectionMedia from "@/components/ui/SectionMedia";
 import SectionTitle from "@/components/ui/SectionTitle";
+import Image from "next/image";
+import img4 from "@/assets/4.png";
+import img1 from "@/assets/1.png";
 
 const moments = [
   "Après une intervention esthétique.",
@@ -57,12 +59,20 @@ export default function RitualSection() {
         </header>
 
         <div className="section-stack">
-          <SectionMedia
-            aspect="wide"
-            tone="light"
-            label="// Visuel — le rituel"
-            title="Séquence gestuelle · Recovery Ritual™"
-          />
+          <figure className="section-media section-media--wide section-media--light rise-item">
+            <div className="section-media__frame">
+              <Image
+                src={img4}
+                alt="Séquence gestuelle · Recovery Ritual™"
+                fill
+                style={{ objectFit: "cover" }}
+              />
+            </div>
+            <figcaption className="section-media__caption">
+              <span className="section-media__label">// Visuel — le rituel</span>
+              <span className="section-media__title">Séquence gestuelle · Recovery Ritual™</span>
+            </figcaption>
+          </figure>
 
           <div>
             <div
@@ -103,12 +113,20 @@ export default function RitualSection() {
               </div>
             </div>
 
-            <SectionMedia
-              aspect="square"
-              tone="dark"
-              label="// Visuel — gestes"
-              title="Macro patch · texture & matière"
-            />
+            <figure className="section-media section-media--square section-media--dark rise-item">
+              <div className="section-media__frame">
+                <Image
+                  src={img1}
+                  alt="Macro patch · texture & matière"
+                  fill
+                  style={{ objectFit: "cover" }}
+                />
+              </div>
+              <figcaption className="section-media__caption">
+                <span className="section-media__label">// Visuel — gestes</span>
+                <span className="section-media__title">Macro patch · texture & matière</span>
+              </figcaption>
+            </figure>
           </div>
 
           <div className="quote-card rise-item">

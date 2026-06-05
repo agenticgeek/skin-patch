@@ -1,5 +1,6 @@
-import SectionMedia from "@/components/ui/SectionMedia";
 import SectionTitle from "@/components/ui/SectionTitle";
+import Image from "next/image";
+import img1 from "@/assets/1.png";
 
 const benefits = [
   "praticité",
@@ -37,12 +38,21 @@ export default function WhyDifferentSection() {
           </p>
         </header>
 
-        <SectionMedia
-          aspect="wide"
-          tone="beige"
-          label="Visuel — innovation"
-          title="Produit hero · SKIN RECOVERY PATCH™"
-        />
+        <figure className="section-media section-media--wide section-media--beige rise-item">
+          <div className="section-media__frame" style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <Image
+              src={img1}
+              alt="Produit hero · SKIN RECOVERY PATCH™"
+              width={400}
+              height={520}
+              style={{ height: "180%", width: "auto", objectFit: "contain" }}
+            />
+          </div>
+          <figcaption className="section-media__caption">
+            <span className="section-media__label">Visuel — innovation</span>
+            <span className="section-media__title">Produit hero · SKIN RECOVERY PATCH™</span>
+          </figcaption>
+        </figure>
 
         <div className="split why-split" data-grid-motion data-rise-stagger>
           <article className="card why-reflexion rise-item">
