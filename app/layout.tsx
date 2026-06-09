@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Poppins, Raleway } from "next/font/google";
 import "./globals.css";
 import CustomCursor from "@/components/ui/CustomCursor";
+import { LanguageProvider } from "@/context/LanguageContext";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -29,8 +30,10 @@ export default function RootLayout({
   return (
     <html lang="fr" className={`${poppins.variable} ${raleway.variable}`}>
       <body>
-        <CustomCursor />
-        {children}
+        <LanguageProvider>
+          <CustomCursor />
+          {children}
+        </LanguageProvider>
       </body>
     </html>
   );

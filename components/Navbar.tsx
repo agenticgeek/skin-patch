@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
+import { useLanguage } from "@/context/LanguageContext";
 
 type NavbarProps = {
   variant?: "home" | "checkout" | "thankyou";
@@ -9,13 +10,8 @@ type NavbarProps = {
 
 const SHOPIFY_URL = "https://hmd0yd-ri.myshopify.com/products/skin-recovery-patch?variant=57317070733689";
 
-const HOME_LINKS = [
-  { href: "#section-2", label: "Le rituel" },
-  { href: "#section-5", label: "Formulation" },
-  { href: SHOPIFY_URL, label: "Commander", isCta: true },
-] as const;
-
 export default function Navbar({ variant = "home" }: NavbarProps) {
+  const { lang, setLang, t } = useLanguage();
   const [open, setOpen] = useState(false);
 
   const close = useCallback(() => setOpen(false), []);
@@ -77,7 +73,7 @@ export default function Navbar({ variant = "home" }: NavbarProps) {
         onClick={toggle}
       >
         <span className="visually-hidden">
-          {open ? "Fermer le menu" : "Ouvrir le menu"}
+          {open ? t.navbar.closeMenu : t.navbar.openMenu}
         </span>
         <span className="topbar-menu-icon" aria-hidden="true" />
       </button>
@@ -90,31 +86,21 @@ export default function Navbar({ variant = "home" }: NavbarProps) {
         <div className="topbar-nav__panel">
           {variant === "home" && (
             <ul className="topbar-nav__list">
-              {HOME_LINKS.map((link) => (
-                <li key={link.href}>
-                  {"isCta" in link ? (
-                    <a
-                      className="topbar-nav__cta"
-                      href={link.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={close}
-                    >
-                      {link.label}
-                    </a>
-                  ) : (
-                    <a
-                      href={link.href}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        handleAnchor(link.href);
-                      }}
-                    >
-                      {link.label}
-                    </a>
-                  )}
-                </li>
-              ))}
+              <li>
+                <a href="#section-2" onClick={(e) => { e.preventDefault(); handleAnchor("#section-2"); }}>
+                  {t.navbar.ritual}
+                </a>
+              </li>
+              <li>
+                <a href="#section-5" onClick={(e) => { e.preventDefault(); handleAnchor("#section-5"); }}>
+                  {t.navbar.formulation}
+                </a>
+              </li>
+              <li>
+                <a className="topbar-nav__cta" href={SHOPIFY_URL} target="_blank" rel="noopener noreferrer" onClick={close}>
+                  {t.navbar.order}
+                </a>
+              </li>
             </ul>
           )}
 
@@ -154,9 +140,9 @@ export default function Navbar({ variant = "home" }: NavbarProps) {
       <nav className="topbar-right" aria-label="Navigation rapide">
         {variant === "home" && (
           <>
-            <a href="#section-2">Le rituel</a>
-            <a href="#section-5">Formulation</a>
-            <a href={SHOPIFY_URL} target="_blank" rel="noopener noreferrer">Commander</a>
+            <a href="#section-2" onClick={(e) => { e.preventDefault(); handleAnchor("#section-2"); }}>{t.navbar.ritual}</a>
+            <a href="#section-5" onClick={(e) => { e.preventDefault(); handleAnchor("#section-5"); }}>{t.navbar.formulation}</a>
+            <a href={SHOPIFY_URL} target="_blank" rel="noopener noreferrer">{t.navbar.order}</a>
           </>
         )}
         {variant === "checkout" && (
@@ -168,6 +154,23 @@ export default function Navbar({ variant = "home" }: NavbarProps) {
         {variant === "thankyou" && (
           <span style={{ opacity: 0.55 }}>Confirmation</span>
         )}
+        <div className="topbar-lang" aria-label="Language switcher">
+          <button
+            className={`topbar-lang__btn${lang === "fr" ? " topbar-lang__btn--active" : ""}`}
+            onClick={() => setLang("fr")}
+            aria-pressed={lang === "fr"}
+          >
+            FR
+          </button>
+          <span className="topbar-lang__sep" aria-hidden="true">/</span>
+          <button
+            className={`topbar-lang__btn${lang === "en" ? " topbar-lang__btn--active" : ""}`}
+            onClick={() => setLang("en")}
+            aria-pressed={lang === "en"
+          }>
+            EN
+          </button>
+        </div>
       </nav>
 
       <div

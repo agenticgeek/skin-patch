@@ -1,41 +1,27 @@
+"use client";
+
 import SectionTitle from "@/components/ui/SectionTitle";
 import Image from "next/image";
 import img1 from "@/assets/1.png";
-
-const benefits = [
-  "praticité",
-  "hydratation",
-  "effet frais",
-  "confort",
-  "expérience sensorielle",
-];
-
-const checklist = [
-  "Simple à intégrer dans votre routine.",
-  "Confortable à porter.",
-  "Pensé pour accompagner votre peau au quotidien.",
-];
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function WhyDifferentSection() {
+  const { t } = useLanguage();
+  const w = t.whyDifferent;
+
   return (
     <section
       className="scene why-diff"
-      data-screen-label="04 Pourquoi différent"
+      data-screen-label={w.screenLabel}
       id="section-4"
     >
       <div className="container reveal">
         <header className="section-head">
           <div className="num stagger-child">
-            § 04 <span className="slash">/</span> Pourquoi le SRP™ est différent
+            {w.num} <span className="slash">/</span> {w.numLabel}
           </div>
-          <SectionTitle
-            lines={["Pourquoi le SKIN RECOVERY", "PATCH™ est différent."]}
-          />
-          <p className="lede stagger-child">
-            Le SKIN RECOVERY PATCH™ fait partie des innovations signatures
-            développées par METCARE® autour du confort cutané et de
-            l&apos;expérience recovery.
-          </p>
+          <SectionTitle lines={w.title} />
+          <p className="lede stagger-child">{w.lede}</p>
         </header>
 
         <figure className="section-media section-media--wide section-media--beige rise-item">
@@ -45,7 +31,7 @@ export default function WhyDifferentSection() {
               alt="Produit hero · SKIN RECOVERY PATCH™"
               width={400}
               height={520}
-              style={{ height: "180%", width: "auto", objectFit: "contain" }}
+              style={{ height: "115%", width: "auto", objectFit: "contain" }}
             />
           </div>
           <figcaption className="section-media__caption">
@@ -56,30 +42,19 @@ export default function WhyDifferentSection() {
 
         <div className="split why-split" data-grid-motion data-rise-stagger>
           <article className="card why-reflexion rise-item">
-            <span className="label">Notre réflexion</span>
-            <h3>Notre réflexion est née du terrain :</h3>
-            <p className="body">
-              certaines zones nécessitent parfois une approche plus ciblée pour
-              accompagner la peau dans les phases où elle devient plus fragile
-              ou sensibilisée.
-            </p>
-            <p className="body" style={{ marginTop: 16 }}>
-              Nous avons donc développé un patch cosmétique pensé pour associer :
-            </p>
+            <span className="label">{w.reflexionLabel}</span>
+            <h3>{w.reflexionTitle}</h3>
+            <p className="body">{w.reflexionBody1}</p>
+            <p className="body" style={{ marginTop: 16 }}>{w.reflexionBody2}</p>
           </article>
 
           <article className="card why-benefits-panel rise-item">
-            <span className="label">Les bénéfices associés</span>
-            <div
-              className="why-benefits"
-              data-grid-motion
-              data-rise-stagger
-              role="list"
-            >
-              {benefits.map((name, i) => (
+            <span className="label">{w.benefitsLabel}</span>
+            <div className="why-benefits" data-grid-motion data-rise-stagger role="list">
+              {w.benefits.map((name, i) => (
                 <div
                   className="why-benefit rise-item"
-                  key={name}
+                  key={i}
                   role="listitem"
                   data-idx={String(i + 1).padStart(2, "0")}
                 >
@@ -93,22 +68,12 @@ export default function WhyDifferentSection() {
           </article>
         </div>
 
-        <div
-          className="why-promise"
-          data-rise-stagger
-          aria-label="Promesses produit"
-        >
-          {checklist.map((txt) => (
-            <div className="why-promise-row rise-item" key={txt}>
+        <div className="why-promise" data-rise-stagger aria-label={w.ariaPromises}>
+          {w.checklist.map((txt, i) => (
+            <div className="why-promise-row rise-item" key={i}>
               <span className="why-promise-mark" aria-hidden="true">
                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                  <path
-                    d="M2.5 6.2L4.8 8.5L9.5 3.8"
-                    stroke="currentColor"
-                    strokeWidth="1.4"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
+                  <path d="M2.5 6.2L4.8 8.5L9.5 3.8" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </span>
               <span className="why-promise-txt">{txt}</span>
