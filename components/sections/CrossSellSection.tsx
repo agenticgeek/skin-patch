@@ -5,30 +5,9 @@ import FilmGrain from "@/components/ui/FilmGrain";
 import SectionTitle from "@/components/ui/SectionTitle";
 import Image from "next/image";
 import img3 from "@/assets/3.png";
+import { useLanguage } from "@/context/LanguageContext";
 
-const crossSellCards = [
-  {
-    tilt: 0,
-    num: "01",
-    title: "DAY & NIGHT COLLAGEN™",
-    desc: "Approche jour/nuit pensée pour soutenir la peau dans les phases de récupération.",
-    pill: "Skincare",
-  },
-  {
-    tilt: 1,
-    num: "02",
-    title: "TISSUE REPAIR CREAM™",
-    desc: "Une crème ciblée pour accompagner le confort cutané et le ressenti de récupération.",
-    pill: "Topique ciblé",
-  },
-  {
-    tilt: 2,
-    num: "03",
-    title: "Drainage & confort tissulaire",
-    desc: "Accompagnement expert. Recovery Experience 24h pour vivre chaque étape sereinement.",
-    pill: "Accompagnement expert",
-  },
-];
+const SHOPIFY_URL = "https://hmd0yd-ri.myshopify.com/products/skin-recovery-patch?variant=57317070733689";
 
 function handleCardMove(e: MouseEvent<HTMLElement>) {
   const card = e.currentTarget;
@@ -46,31 +25,27 @@ function resetCardTilt(e: MouseEvent<HTMLElement>) {
 }
 
 export default function CrossSellSection() {
+  const { t } = useLanguage();
+  const c = t.crossSell;
+
   return (
     <section
       className="scene crosssell-scene"
-      data-screen-label="07 Cross-sell SRP"
+      data-screen-label={c.screenLabel}
       id="section-7"
     >
       <div className="container reveal">
         <header className="section-head">
           <div className="num stagger-child">
-            § 07 <span className="slash">/</span> Signature Recovery Protocol™
+            {c.num} <span className="slash">/</span> {c.numLabel}
           </div>
-          <SectionTitle
-            lines={["Découvrez le", "SIGNATURE RECOVERY PROTOCOL™."]}
-          />
+          <SectionTitle lines={c.title} />
         </header>
 
         <div className="section-stack">
           <figure className="section-media section-media--wide section-media--light rise-item">
             <div className="section-media__frame">
-              <Image
-                src={img3}
-                alt="Gamme METCARE® · recovery protocol"
-                fill
-                style={{ objectFit: "cover" }}
-              />
+              <Image src={img3} alt="Gamme METCARE® · recovery protocol" fill style={{ objectFit: "cover" }} />
             </div>
             <figcaption className="section-media__caption">
               <span className="section-media__label">// Visuel — protocole</span>
@@ -78,70 +53,54 @@ export default function CrossSellSection() {
             </figcaption>
           </figure>
 
-        <article className="protocol-banner rise-item">
-          <div className="protocol-banner-media" aria-hidden="true">
-            <div className="protocol-banner-aurora">
-              <span className="blob blob-a" />
-              <span className="blob blob-b" />
-              <span className="blob blob-c" />
-            </div>
-            <FilmGrain
-              filterId="protocol-grain-filter"
-              className="protocol-banner-grain"
-            />
-          </div>
-          <span className="protocol-banner-watermark">SRP™</span>
-          <div className="protocol-banner-copy">
-            <span className="lbl">// Une stratégie complète</span>
-            <h3>Avant, pendant et après votre intervention.</h3>
-            <p>
-              Une stratégie complète de récupération esthétique développée par
-              METCARE® pour accompagner votre corps, votre peau et votre confort
-              à chaque étape du parcours.
-            </p>
-          </div>
-          <div className="protocol-banner-action">
-            <a
-              className="cta cta-protocol"
-              href="https://hmd0yd-ri.myshopify.com/products/skin-recovery-patch?variant=57317070733689"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Découvrir le protocole
-              <span className="arrow" aria-hidden="true">
-                →
-              </span>
-            </a>
-            <span className="protocol-banner-note">
-              // placeholder url — client to supply
-            </span>
-          </div>
-        </article>
-
-        <div className="crosssell" data-grid-motion data-rise-stagger>
-          {crossSellCards.map((card) => (
-            <article
-              className="tilt-card recovery-card rise-item"
-              data-tilt={card.tilt}
-              key={card.num}
-              onMouseMove={handleCardMove}
-              onMouseLeave={resetCardTilt}
-            >
-              <span className="recovery-card-ghost" aria-hidden="true">
-                {card.num}
-              </span>
-              <div className="recovery-card-top">
-                <span className="num">{card.num} / SRP™</span>
-                <span className="recovery-card-arrow" aria-hidden="true">
-                  ↗
-                </span>
+          <article className="protocol-banner rise-item">
+            <div className="protocol-banner-media" aria-hidden="true">
+              <div className="protocol-banner-aurora">
+                <span className="blob blob-a" />
+                <span className="blob blob-b" />
+                <span className="blob blob-c" />
               </div>
-              <h3>{card.title}</h3>
-              <p>{card.desc}</p>
-              <span className="pill-mini">{card.pill}</span>
-            </article>
-          ))}
-        </div>
+              <FilmGrain filterId="protocol-grain-filter" className="protocol-banner-grain" />
+            </div>
+            <span className="protocol-banner-watermark">SRP™</span>
+            <div className="protocol-banner-copy">
+              <span className="lbl">{c.bannerLabel}</span>
+              <h3>{c.bannerTitle}</h3>
+              <p>{c.bannerBody}</p>
+            </div>
+            <div className="protocol-banner-action">
+              <a
+                className="cta cta-protocol"
+                href={SHOPIFY_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {c.bannerCta}
+                <span className="arrow" aria-hidden="true">→</span>
+              </a>
+            </div>
+          </article>
+
+          <div className="crosssell" data-grid-motion data-rise-stagger>
+            {c.cards.map((card) => (
+              <article
+                className="tilt-card recovery-card rise-item"
+                data-tilt={card.num}
+                key={card.num}
+                onMouseMove={handleCardMove}
+                onMouseLeave={resetCardTilt}
+              >
+                <span className="recovery-card-ghost" aria-hidden="true">{card.num}</span>
+                <div className="recovery-card-top">
+                  <span className="num">{card.num} / SRP™</span>
+                  <span className="recovery-card-arrow" aria-hidden="true">↗</span>
+                </div>
+                <h3>{card.title}</h3>
+                <p>{card.desc}</p>
+                <span className="pill-mini">{card.pill}</span>
+              </article>
+            ))}
+          </div>
         </div>
       </div>
     </section>

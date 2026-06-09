@@ -1,59 +1,46 @@
+"use client";
+
 import VisionSpheres from "@/components/illustrations/VisionSpheres";
 import FilmGrain from "@/components/ui/FilmGrain";
 import SectionTitle from "@/components/ui/SectionTitle";
 import Image from "next/image";
 import img4 from "@/assets/4.png";
-
-const visionItems = [
-  "plus sensorielle",
-  "plus élégante",
-  "plus confortable",
-  "pensée autour du ressenti",
-];
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function VisionSection() {
+  const { t } = useLanguage();
+  const v = t.vision;
+
   return (
     <section
       className="scene vision-scene"
-      data-screen-label="06 L'expérience METCARE"
+      data-screen-label={v.screenLabel}
       id="section-6"
     >
       <VisionSpheres />
       <div className="container container--narrow reveal">
         <header className="section-head">
           <div className="num stagger-child">
-            § 06 <span className="slash">/</span> L&apos;Expérience METCARE®
+            {v.num} <span className="slash">/</span> {v.numLabel}
           </div>
-          <SectionTitle
-            lines={[
-              "Une nouvelle vision",
-              "de la récupération cutanée.",
-            ]}
-          />
-          <p className="lede stagger-child">
-            Le SKIN RECOVERY PATCH™ fait partie d&apos;une nouvelle vision de
-            la récupération cutanée — plus sensorielle, plus élégante, plus
-            confortable, pensée autour du ressenti.
-          </p>
+          <SectionTitle lines={v.title} />
+          <p className="lede stagger-child">{v.lede}</p>
         </header>
 
         <div className="section-editorial">
-          <article className="vision-card rise-item" aria-label="La vision">
-            <FilmGrain
-              filterId="vision-grain-filter"
-              className="vision-card-grain"
-            />
+          <article className="vision-card rise-item" aria-label={v.cardLabel}>
+            <FilmGrain filterId="vision-grain-filter" className="vision-card-grain" />
             <div>
-              <span className="v-num">// La vision METCARE®</span>
+              <span className="v-num">{v.cardLabel}</span>
               <h3>
-                Une peau plus confortable
-                <br />
-                transforme aussi l&apos;expérience vécue.
+                {v.cardTitle.split("\n").map((line, i) => (
+                  <span key={i}>{line}{i === 0 && <br />}</span>
+                ))}
               </h3>
             </div>
             <div className="vlist" data-grid-motion data-rise-stagger>
-              {visionItems.map((txt, i) => (
-                <div className="vrow rise-item" key={txt}>
+              {v.visionItems.map((txt, i) => (
+                <div className="vrow rise-item" key={i}>
                   <span className="v-idx">{String(i + 1).padStart(2, "0")}</span>
                   <span className="v-txt">{txt}</span>
                 </div>
@@ -63,12 +50,7 @@ export default function VisionSection() {
 
           <figure className="section-media section-media--portrait section-media--dark rise-item">
             <div className="section-media__frame">
-              <Image
-                src={img4}
-                alt="Ambiance spa · recovery lifestyle"
-                fill
-                style={{ objectFit: "cover" }}
-              />
+              <Image src={img4} alt="Ambiance spa · recovery lifestyle" fill style={{ objectFit: "cover" }} />
             </div>
             <figcaption className="section-media__caption">
               <span className="section-media__label">// Visuel — expérience</span>

@@ -1,93 +1,54 @@
-import type { ReactNode } from "react";
+"use client";
+
 import RitualMouseAurora from "@/components/illustrations/RitualMouseAurora";
 import SectionTitle from "@/components/ui/SectionTitle";
 import Image from "next/image";
 import img4 from "@/assets/4.png";
 import img1 from "@/assets/1.png";
-
-const moments = [
-  "Après une intervention esthétique.",
-  "Après un voyage.",
-  "Après une longue journée.",
-  "Après une exposition extérieure.",
-  "Après les moments où la peau semble plus fragile ou inconfortable.",
-];
-
-type RitualStep = {
-  n: string;
-  h: string;
-  v: ReactNode;
-};
-
-const steps: RitualStep[] = [
-  { n: "Geste 01", h: "Le patch, sur la zone choisie.", v: "Appliquer." },
-  { n: "Geste 02", h: "Inspirer, expirer, ressentir.", v: "Respirer." },
-  { n: "Geste 03", h: "Quelques minutes de pause.", v: "Ralentir." },
-  {
-    n: "Geste 04",
-    h: "Le geste devient rituel.",
-    v: (
-      <>
-        Prendre
-        <br />
-        soin de soi.
-      </>
-    ),
-  },
-];
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function RitualSection() {
+  const { t } = useLanguage();
+  const r = t.ritual;
+
   return (
     <section
       className="scene tinted"
-      data-screen-label="03 Rituel Recovery"
+      data-screen-label={r.screenLabel}
       id="section-3"
     >
       <RitualMouseAurora />
       <div className="container reveal">
         <header className="section-head">
           <div className="num stagger-child">
-            § 03 <span className="slash">/</span> Le Rituel Recovery METCARE®
+            {r.num} <span className="slash">/</span> {r.numLabel}
           </div>
-          <SectionTitle
-            lines={["Un véritable rituel", "de récupération cutanée."]}
-          />
-          <p className="lede stagger-child">
-            Le SKIN RECOVERY PATCH™ a été pensé pour devenir un moment de
-            fraîcheur, de confort et de douceur dans le quotidien.
-          </p>
+          <SectionTitle lines={r.title} />
+          <p className="lede stagger-child">{r.lede}</p>
         </header>
 
         <div className="section-stack">
           <figure className="section-media section-media--wide section-media--light rise-item">
             <div className="section-media__frame">
-              <Image
-                src={img4}
-                alt="Séquence gestuelle · Recovery Ritual™"
-                fill
-                style={{ objectFit: "cover" }}
-              />
+              <Image src={img4} alt={r.stepsTitle} fill style={{ objectFit: "cover" }} />
             </div>
             <figcaption className="section-media__caption">
               <span className="section-media__label">// Visuel — le rituel</span>
-              <span className="section-media__title">Séquence gestuelle · Recovery Ritual™</span>
+              <span className="section-media__title">{r.stepsTitle}</span>
             </figcaption>
           </figure>
 
           <div>
-            <div
-              className="card-label rise-item"
-              style={{ color: "var(--silver-blue)" }}
-            >
-              Les moments d&apos;application
+            <div className="card-label rise-item" style={{ color: "var(--silver-blue)" }}>
+              {r.momentsLabel}
             </div>
             <div
               className="moments"
               data-grid-motion
               data-rise-stagger
-              aria-label="Moments d'application"
+              aria-label={r.momentsAriaLabel}
             >
-              {moments.map((txt, i) => (
+              {r.moments.map((txt, i) => (
                 <article className="moment rise-item" key={i}>
                   <span className="glyph">{String(i + 1).padStart(2, "0")}</span>
                   <span className="txt">{txt}</span>
@@ -97,17 +58,21 @@ export default function RitualSection() {
           </div>
 
           <div className="section-editorial">
-            <div className="ritual" aria-label="Gestes du rituel">
-              <div className="ritual-label rise-item">
-                // Les 4 gestes · Recovery Ritual™
-              </div>
-              <h3 className="rise-item">Quatre gestes pour ralentir.</h3>
+            <div className="ritual" aria-label={r.stepsLabel}>
+              <div className="ritual-label rise-item">{r.stepsLabel}</div>
+              <h3 className="rise-item">{r.stepsTitle}</h3>
               <div className="steps" data-grid-motion data-rise-stagger>
-                {steps.map((step) => (
-                  <div className="step rise-item" key={step.n}>
+                {r.steps.map((step, i) => (
+                  <div className="step rise-item" key={i}>
                     <span className="n">{step.n}</span>
                     <span className="h">{step.h}</span>
-                    <span className="v">{step.v}</span>
+                    <span className="v">
+                      {step.v.includes("\n")
+                        ? step.v.split("\n").map((line, i) => (
+                            <span key={i}>{line}{i === 0 && <br />}</span>
+                          ))
+                        : step.v}
+                    </span>
                   </div>
                 ))}
               </div>
@@ -115,12 +80,7 @@ export default function RitualSection() {
 
             <figure className="section-media section-media--square section-media--dark rise-item">
               <div className="section-media__frame">
-                <Image
-                  src={img1}
-                  alt="Macro patch · texture & matière"
-                  fill
-                  style={{ objectFit: "cover" }}
-                />
+                <Image src={img1} alt="Macro patch · texture & matière" fill style={{ objectFit: "cover" }} />
               </div>
               <figcaption className="section-media__caption">
                 <span className="section-media__label">// Visuel — gestes</span>
@@ -129,10 +89,7 @@ export default function RitualSection() {
             </figure>
           </div>
 
-          <div className="quote-card rise-item">
-            Parce que prendre soin de sa peau, c&apos;est aussi prendre soin de
-            soi.
-          </div>
+          <div className="quote-card rise-item">{r.quote}</div>
         </div>
       </div>
     </section>
