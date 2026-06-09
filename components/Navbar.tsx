@@ -7,10 +7,12 @@ type NavbarProps = {
   variant?: "home" | "checkout" | "thankyou";
 };
 
+const SHOPIFY_URL = "https://hmd0yd-ri.myshopify.com/products/skin-recovery-patch?variant=57317070733689";
+
 const HOME_LINKS = [
   { href: "#section-2", label: "Le rituel" },
   { href: "#section-5", label: "Formulation" },
-  { href: "/checkout", label: "Commander", isCta: true },
+  { href: SHOPIFY_URL, label: "Commander", isCta: true },
 ] as const;
 
 export default function Navbar({ variant = "home" }: NavbarProps) {
@@ -90,16 +92,16 @@ export default function Navbar({ variant = "home" }: NavbarProps) {
             <ul className="topbar-nav__list">
               {HOME_LINKS.map((link) => (
                 <li key={link.href}>
-                  {link.href.startsWith("/") ? (
-                    <Link
-                      className={
-                        link.href === "/checkout" ? "topbar-nav__cta" : undefined
-                      }
+                  {"isCta" in link ? (
+                    <a
+                      className="topbar-nav__cta"
                       href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       onClick={close}
                     >
                       {link.label}
-                    </Link>
+                    </a>
                   ) : (
                     <a
                       href={link.href}
@@ -154,7 +156,7 @@ export default function Navbar({ variant = "home" }: NavbarProps) {
           <>
             <a href="#section-2">Le rituel</a>
             <a href="#section-5">Formulation</a>
-            <Link href="/checkout">Commander</Link>
+            <a href={SHOPIFY_URL} target="_blank" rel="noopener noreferrer">Commander</a>
           </>
         )}
         {variant === "checkout" && (
