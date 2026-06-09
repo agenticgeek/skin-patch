@@ -102,12 +102,12 @@ export default function HeroSection() {
                 <p className="hero-tag">
                   Parce que votre peau mérite aussi sa récupération.
                 </p>
-                <Link className="cta cta-hero" href="/checkout">
+                <a className="cta cta-hero" href="https://hmd0yd-ri.myshopify.com/products/skin-recovery-patch?variant=57317070733689" target="_blank" rel="noopener noreferrer">
                   Commander mes SKIN RECOVERY PATCH™
                   <span className="arrow" aria-hidden="true">
                     →
                   </span>
-                </Link>
+                </a>
                 <small className="hero-sub-note">
                   Livraison premium — Paiement sécurisé
                 </small>

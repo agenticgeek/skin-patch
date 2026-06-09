@@ -103,8 +103,9 @@ export default function CrossSellSection() {
           <div className="protocol-banner-action">
             <a
               className="cta cta-protocol"
-              href="#"
-              data-href-placeholder="SRP-protocol-url"
+              href="https://hmd0yd-ri.myshopify.com/products/skin-recovery-patch?variant=57317070733689"
+              target="_blank"
+              rel="noopener noreferrer"
             >
               Découvrir le protocole
               <span className="arrow" aria-hidden="true">
