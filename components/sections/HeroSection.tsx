@@ -4,7 +4,7 @@ import AuroraBackground from "@/components/AuroraBackground";
 import HeroStretchTitle from "@/components/hero/HeroStretchTitle";
 import HeroIllustration from "@/components/illustrations/HeroIllustration";
 import Image from "next/image";
-import img3 from "@/assets/3.png";
+import img4 from "@/assets/4.png";
 import { useLanguage } from "@/context/LanguageContext";
 
 const SHOPIFY_URL = "https://hmd0yd-ri.myshopify.com/products/skin-recovery-patch?variant=57317070733689";
@@ -38,7 +38,7 @@ export default function HeroSection() {
 
           <figure className="hero-media rise-item" style={{ margin: "2rem 0", width: "100%", height: "500px", borderRadius: "24px", overflow: "hidden" }}>
             <div style={{ position: "relative", width: "100%", height: "100%" }}>
-              <Image src={img3} alt="Recovery lifestyle" fill style={{ objectFit: "cover" }} />
+              <Image src={img4} alt="Recovery lifestyle" fill style={{ objectFit: "cover" }} />
             </div>
           </figure>
 
