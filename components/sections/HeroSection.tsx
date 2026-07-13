@@ -6,8 +6,15 @@ import HeroIllustration from "@/components/illustrations/HeroIllustration";
 import Image from "next/image";
 import img4 from "@/assets/4.png";
 import { useLanguage } from "@/context/LanguageContext";
+import { trackMetaEvent } from "@/lib/metaPixel";
 
 const SHOPIFY_URL = "https://hmd0yd-ri.myshopify.com/products/skin-recovery-patch?variant=57317070733689";
+
+const trackOrderClick = () =>
+  trackMetaEvent("InitiateCheckout", {
+    content_name: "SKIN RECOVERY PATCH™",
+    content_type: "product",
+  });
 
 export default function HeroSection() {
   const { t } = useLanguage();
@@ -79,6 +86,7 @@ export default function HeroSection() {
                   href={SHOPIFY_URL}
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={trackOrderClick}
                 >
                   {h.cta}
                   <span className="arrow" aria-hidden="true">→</span>

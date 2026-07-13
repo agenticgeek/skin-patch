@@ -14,10 +14,12 @@ import WhyDifferentSection from "@/components/sections/WhyDifferentSection";
 import FormulationSection from "@/components/sections/FormulationSection";
 import VisionSection from "@/components/sections/VisionSection";
 import CrossSellSection from "@/components/sections/CrossSellSection";
+import ProductViewTracker from "@/components/analytics/ProductViewTracker";
 
 export default function HomePage() {
   return (
     <>
+      <ProductViewTracker />
       <AuroraBackground />
       <ScrollGridMotion />
       <Navbar />

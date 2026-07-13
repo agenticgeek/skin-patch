@@ -6,8 +6,15 @@ import SectionTitle from "@/components/ui/SectionTitle";
 import Image from "next/image";
 import img3 from "@/assets/3.png";
 import { useLanguage } from "@/context/LanguageContext";
+import { trackMetaEvent } from "@/lib/metaPixel";
 
 const SHOPIFY_URL = "https://hmd0yd-ri.myshopify.com/products/skin-recovery-patch?variant=57317070733689";
+
+const trackOrderClick = () =>
+  trackMetaEvent("InitiateCheckout", {
+    content_name: "SKIN RECOVERY PATCH™",
+    content_type: "product",
+  });
 
 function handleCardMove(e: MouseEvent<HTMLElement>) {
   const card = e.currentTarget;
@@ -74,6 +81,7 @@ export default function CrossSellSection() {
                 href={SHOPIFY_URL}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={trackOrderClick}
               >
                 {c.bannerCta}
                 <span className="arrow" aria-hidden="true">→</span>
