@@ -3,12 +3,19 @@
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 import { useLanguage } from "@/context/LanguageContext";
+import { trackMetaEvent } from "@/lib/metaPixel";
 
 type NavbarProps = {
   variant?: "home" | "checkout" | "thankyou";
 };
 
 const SHOPIFY_URL = "https://hmd0yd-ri.myshopify.com/products/skin-recovery-patch?variant=57317070733689";
+
+const trackOrderClick = () =>
+  trackMetaEvent("InitiateCheckout", {
+    content_name: "SKIN RECOVERY PATCH™",
+    content_type: "product",
+  });
 
 export default function Navbar({ variant = "home" }: NavbarProps) {
   const { lang, setLang, t } = useLanguage();
@@ -97,7 +104,7 @@ export default function Navbar({ variant = "home" }: NavbarProps) {
                 </a>
               </li>
               <li>
-                <a className="topbar-nav__cta" href={SHOPIFY_URL} target="_blank" rel="noopener noreferrer" onClick={close}>
+                <a className="topbar-nav__cta" href={SHOPIFY_URL} target="_blank" rel="noopener noreferrer" onClick={() => { trackOrderClick(); close(); }}>
                   {t.navbar.order}
                 </a>
               </li>
@@ -142,7 +149,7 @@ export default function Navbar({ variant = "home" }: NavbarProps) {
           <>
             <a href="#section-2" onClick={(e) => { e.preventDefault(); handleAnchor("#section-2"); }}>{t.navbar.ritual}</a>
             <a href="#section-5" onClick={(e) => { e.preventDefault(); handleAnchor("#section-5"); }}>{t.navbar.formulation}</a>
-            <a href={SHOPIFY_URL} target="_blank" rel="noopener noreferrer">{t.navbar.order}</a>
+            <a href={SHOPIFY_URL} target="_blank" rel="noopener noreferrer" onClick={trackOrderClick}>{t.navbar.order}</a>
           </>
         )}
         {variant === "checkout" && (

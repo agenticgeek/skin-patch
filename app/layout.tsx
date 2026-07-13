@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Poppins, Raleway } from "next/font/google";
 import "./globals.css";
 import CustomCursor from "@/components/ui/CustomCursor";
+import MetaPixel from "@/components/MetaPixel";
 import { LanguageProvider } from "@/context/LanguageContext";
 
 const poppins = Poppins({
@@ -30,6 +31,7 @@ export default function RootLayout({
   return (
     <html lang="fr" className={`${poppins.variable} ${raleway.variable}`}>
       <body>
+        <MetaPixel />
         <LanguageProvider>
           <CustomCursor />
           {children}
