@@ -5,8 +5,11 @@ import AuroraBackground from "@/components/AuroraBackground";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollEngine from "@/components/ScrollEngine";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function CheckoutClient() {
+  const { t } = useLanguage();
+  const c = t.checkout;
   const [state, setState] = useState<"a" | "b">("a");
   const isA = state === "a";
 
@@ -18,27 +21,24 @@ export default function CheckoutClient() {
 
       <main className="checkout-shell" data-screen-label="Checkout">
         <div className="crumbs">
-          <span>Panier</span>
+          <span>{c.crumbs[0]}</span>
           <span className="dot">·</span>
-          <span className="active">Paiement</span>
+          <span className="active">{c.crumbs[1]}</span>
           <span className="dot">·</span>
-          <span>Confirmation</span>
+          <span>{c.crumbs[2]}</span>
         </div>
 
-        <h1 className="checkout-heading">Finalisez votre Recovery Ritual™.</h1>
-        <p className="checkout-sub">
-          Paiement sécurisé via Stripe. Vous restez à chaque étape dans
-          l&apos;expérience METCARE®.
-        </p>
+        <h1 className="checkout-heading">{c.heading}</h1>
+        <p className="checkout-sub">{c.sub}</p>
 
-        <div className="trust-strip" aria-label="Garanties">
+        <div className="trust-strip" aria-label={c.trustAriaLabel}>
           <div className="trust">
             <span className="badge" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4">
                 <path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z" />
               </svg>
             </span>
-            <span>Paiement sécurisé</span>
+            <span>{c.trust[0]}</span>
           </div>
           <div className="trust">
             <span className="badge" aria-hidden="true">
@@ -46,7 +46,7 @@ export default function CheckoutClient() {
                 <path d="M3 7h13l2 4h3v6h-2a2 2 0 11-4 0H10a2 2 0 11-4 0H3z" />
               </svg>
             </span>
-            <span>Livraison premium</span>
+            <span>{c.trust[1]}</span>
           </div>
           <div className="trust">
             <span className="badge" aria-hidden="true">
@@ -54,7 +54,7 @@ export default function CheckoutClient() {
                 <path d="M4 6h16M4 12h10M4 18h16" />
               </svg>
             </span>
-            <span>Conseils d&apos;utilisation</span>
+            <span>{c.trust[2]}</span>
           </div>
           <div className="trust">
             <span className="badge" aria-hidden="true">
@@ -63,11 +63,11 @@ export default function CheckoutClient() {
                 <path d="M4 21c1.5-4 5-6 8-6s6.5 2 8 6" />
               </svg>
             </span>
-            <span>Accompagnement expert METCARE®</span>
+            <span>{c.trust[3]}</span>
           </div>
         </div>
 
-        <div className="state-toggle" role="tablist" aria-label="Placement de l'upsell">
+        <div className="state-toggle" role="tablist" aria-label={c.stateToggleAriaLabel}>
           <button
             id="state-a"
             className={isA ? "active" : ""}
@@ -76,7 +76,7 @@ export default function CheckoutClient() {
             type="button"
             onClick={() => setState("a")}
           >
-            État A · Order bump
+            {c.stateA}
           </button>
           <button
             id="state-b"
@@ -86,15 +86,15 @@ export default function CheckoutClient() {
             type="button"
             onClick={() => setState("b")}
           >
-            État B · Post-purchase
+            {c.stateB}
           </button>
         </div>
 
         <div className="checkout-grid">
           <div className="checkout-form">
             <section className="form-card">
-              <h3>Paiement express</h3>
-              <div className="wallets" aria-label="Paiement express">
+              <h3>{c.expressPaymentHeading}</h3>
+              <div className="wallets" aria-label={c.expressPaymentHeading}>
                 <button className="wallet-btn dark" type="button" aria-label="Apple Pay (placeholder)">
                   <span className="glyph" aria-hidden="true" /> Apple Pay
                 </button>
@@ -111,27 +111,27 @@ export default function CheckoutClient() {
                 // stripe payment request button — render via stripe.paymentRequest()
               </div>
               <div className="divider-or">
-                <span>ou par carte</span>
+                <span>{c.orCard}</span>
               </div>
 
               <div className="field">
-                <label htmlFor="email">Adresse e-mail</label>
-                <input id="email" type="email" placeholder="vous@exemple.com" autoComplete="email" />
+                <label htmlFor="email">{c.emailLabel}</label>
+                <input id="email" type="email" placeholder={c.emailPlaceholder} autoComplete="email" />
               </div>
 
               <div className="field-row">
                 <div className="field">
-                  <label htmlFor="fn">Prénom</label>
+                  <label htmlFor="fn">{c.firstNameLabel}</label>
                   <input id="fn" type="text" autoComplete="given-name" />
                 </div>
                 <div className="field">
-                  <label htmlFor="ln">Nom</label>
+                  <label htmlFor="ln">{c.lastNameLabel}</label>
                   <input id="ln" type="text" autoComplete="family-name" />
                 </div>
               </div>
 
               <div className="field">
-                <label>Numéro de carte</label>
+                <label>{c.cardNumberLabel}</label>
                 <div className="stripe-mock" aria-label="Stripe Elements card mock">
                   <span className="ph-cc">•••• •••• •••• ••••</span>
                   <div className="cards" aria-hidden="true">
@@ -142,13 +142,13 @@ export default function CheckoutClient() {
                 </div>
                 <div className="field-row" style={{ marginTop: 12 }}>
                   <div className="field" style={{ margin: 0 }}>
-                    <label>Expiration</label>
+                    <label>{c.expirationLabel}</label>
                     <div className="stripe-mock">
                       <span className="ph-cc">MM / AA</span>
                     </div>
                   </div>
                   <div className="field" style={{ margin: 0 }}>
-                    <label>CVC</label>
+                    <label>{c.cvcLabel}</label>
                     <div className="stripe-mock">
                       <span className="ph-cc">•••</span>
                     </div>
@@ -160,11 +160,10 @@ export default function CheckoutClient() {
                 <span className="err-dot" aria-hidden="true" />
                 <div>
                   <strong style={{ fontFamily: "'Poppins',sans-serif", fontSize: 13, letterSpacing: "0.06em" }}>
-                    Erreur de paiement
+                    {c.errorTitle}
                   </strong>
                   <div style={{ marginTop: 4, opacity: 0.78 }}>
-                    Votre carte a été refusée. Merci de vérifier les informations ou
-                    d&apos;essayer une autre carte. Aucun rechargement de page n&apos;a lieu.
+                    {c.errorBody}
                   </div>
                   <div
                     style={{
@@ -183,45 +182,40 @@ export default function CheckoutClient() {
             </section>
 
             <section className="form-card">
-              <h3>Livraison</h3>
+              <h3>{c.shippingHeading}</h3>
               <div className="field">
-                <label htmlFor="addr">Adresse</label>
+                <label htmlFor="addr">{c.addressLabel}</label>
                 <input id="addr" type="text" autoComplete="street-address" />
               </div>
               <div className="field-row three">
                 <div className="field">
-                  <label htmlFor="zip">Code postal</label>
+                  <label htmlFor="zip">{c.postalCodeLabel}</label>
                   <input id="zip" type="text" autoComplete="postal-code" />
                 </div>
                 <div className="field">
-                  <label htmlFor="city">Ville</label>
+                  <label htmlFor="city">{c.cityLabel}</label>
                   <input id="city" type="text" autoComplete="address-level2" />
                 </div>
                 <div className="field">
-                  <label htmlFor="country">Pays</label>
-                  <select id="country" defaultValue="France">
-                    <option>France</option>
-                    <option>Belgique</option>
-                    <option>Suisse</option>
-                    <option>Luxembourg</option>
-                    <option>Monaco</option>
+                  <label htmlFor="country">{c.countryLabel}</label>
+                  <select id="country" defaultValue={c.countries[0]}>
+                    {c.countries.map((country) => (
+                      <option key={country}>{country}</option>
+                    ))}
                   </select>
                 </div>
               </div>
             </section>
 
             <section className="form-card" id="bump-wrap" style={{ display: isA ? "" : "none" }}>
-              <h3>Compléter votre rituel</h3>
+              <h3>{c.completeRitualHeading}</h3>
               <div className="ph-banner">// state a — order bump · pre-purchase</div>
 
               <label className="bump">
                 <input type="checkbox" defaultChecked />
                 <div className="bump-body">
-                  <h4>Ajoutez le TISSUE REPAIR CREAM™</h4>
-                  <p>
-                    Crème ciblée pour accompagner le confort cutané et le ressenti
-                    de récupération.
-                  </p>
+                  <h4>{c.bumps[0].title}</h4>
+                  <p>{c.bumps[0].desc}</p>
                   <div className="bump-price">// placeholder · prix client à fournir</div>
                 </div>
               </label>
@@ -229,11 +223,8 @@ export default function CheckoutClient() {
               <label className="bump">
                 <input type="checkbox" />
                 <div className="bump-body">
-                  <h4>Ajoutez le DAY &amp; NIGHT COLLAGEN™</h4>
-                  <p>
-                    Approche jour/nuit pensée pour soutenir la peau dans les phases
-                    de récupération.
-                  </p>
+                  <h4>{c.bumps[1].title}</h4>
+                  <p>{c.bumps[1].desc}</p>
                   <div className="bump-price">// placeholder · prix client à fournir</div>
                 </div>
               </label>
@@ -241,11 +232,8 @@ export default function CheckoutClient() {
               <label className="bump">
                 <input type="checkbox" />
                 <div className="bump-body">
-                  <h4>Découvrir le protocole complet SRP™</h4>
-                  <p>
-                    Le SIGNATURE RECOVERY PROTOCOL™ : accompagnement expert, drainage
-                    &amp; confort tissulaire, Recovery Experience 24h.
-                  </p>
+                  <h4>{c.bumps[2].title}</h4>
+                  <p>{c.bumps[2].desc}</p>
                   <div className="bump-price">// placeholder url · protocole complet</div>
                 </div>
               </label>
@@ -253,8 +241,8 @@ export default function CheckoutClient() {
           </div>
 
           <aside>
-            <div className="summary" aria-label="Récapitulatif">
-              <h3>Récapitulatif</h3>
+            <div className="summary" aria-label={c.summaryAriaLabel}>
+              <h3>{c.summaryHeading}</h3>
 
               <div className="summary-row">
                 <div>
@@ -267,26 +255,26 @@ export default function CheckoutClient() {
               <div className="summary-row" id="bump-summary" style={{ display: isA ? "" : "none" }}>
                 <div>
                   <div className="name">+ TISSUE REPAIR CREAM™</div>
-                  <div className="meta">Order bump · activé</div>
+                  <div className="meta">Order bump · {c.bumpActivated}</div>
                 </div>
                 <div className="price">// prix placeholder</div>
               </div>
 
               <div className="summary-row">
                 <div>
-                  <div className="name">Livraison premium</div>
-                  <div className="meta">Suivi & assistance</div>
+                  <div className="name">{c.shippingName}</div>
+                  <div className="meta">{c.shippingMeta}</div>
                 </div>
                 <div className="price">// placeholder</div>
               </div>
 
               <div className="summary-total">
-                <span className="lbl">Total</span>
+                <span className="lbl">{c.total}</span>
                 <span className="amt">// total placeholder</span>
               </div>
 
               <button className="summary-cta" type="button">
-                Payer en sécurité
+                {c.payButton}
                 <span
                   className="arrow"
                   style={{
@@ -335,12 +323,12 @@ export default function CheckoutClient() {
         <section
           className={`post-upsell${!isA ? " visible" : ""}`}
           id="state-b-block"
-          aria-label="État B · Post-purchase"
+          aria-label={c.stateB}
         >
           <div className="eyebrow">
             // state b — post-purchase redirect page (after stripe success)
           </div>
-          <h3>Une dernière chose : complétez votre Recovery Ritual™.</h3>
+          <h3>{c.postUpsellHeading}</h3>
           <p
             style={{
               marginTop: 12,
@@ -351,8 +339,7 @@ export default function CheckoutClient() {
               opacity: 0.82,
             }}
           >
-            Ajoutez l&apos;un de ces compagnons SRP™ en un clic. Votre paiement
-            n&apos;est pas re-saisi.
+            {c.postUpsellBody}
           </p>
 
           <div className="upsells">
@@ -361,7 +348,7 @@ export default function CheckoutClient() {
               <div className="name">TISSUE REPAIR CREAM™</div>
               <div className="ph-price">// placeholder prix</div>
               <button className="add" type="button">
-                Ajouter en un clic
+                {c.upsellAddButton}
               </button>
             </div>
             <div className="upsell-card">
@@ -369,21 +356,21 @@ export default function CheckoutClient() {
               <div className="name">DAY &amp; NIGHT COLLAGEN™</div>
               <div className="ph-price">// placeholder prix</div>
               <button className="add" type="button">
-                Ajouter en un clic
+                {c.upsellAddButton}
               </button>
             </div>
             <div className="upsell-card">
               <div className="thumb" />
-              <div className="name">Protocole complet SRP™</div>
+              <div className="name">{c.fullProtocolName}</div>
               <div className="ph-price">// placeholder url</div>
               <button className="add" type="button">
-                Découvrir
+                {c.upsellDiscoverButton}
               </button>
             </div>
           </div>
 
           <button className="cta ghost" style={{ marginTop: 26 }} type="button">
-            Non merci, continuer
+            {c.continueButton}
             <span className="arrow" aria-hidden="true">
               →
             </span>

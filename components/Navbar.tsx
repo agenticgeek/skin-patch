@@ -88,7 +88,7 @@ export default function Navbar({ variant = "home" }: NavbarProps) {
       <nav
         id="site-nav"
         className="topbar-nav"
-        aria-label="Navigation principale"
+        aria-label={t.navbar.navPrimaryLabel}
       >
         <div className="topbar-nav__panel">
           {variant === "home" && (
@@ -115,16 +115,16 @@ export default function Navbar({ variant = "home" }: NavbarProps) {
             <ul className="topbar-nav__list">
               <li>
                 <Link href="/" onClick={close}>
-                  ← Retour à l&apos;accueil
+                  {t.navbar.backToHome}
                 </Link>
               </li>
               <li>
                 <Link className="topbar-nav__cta" href="/checkout" onClick={close}>
-                  Paiement
+                  {t.navbar.payment}
                 </Link>
               </li>
               <li>
-                <span className="topbar-nav__muted">Paiement sécurisé · Stripe</span>
+                <span className="topbar-nav__muted">{t.navbar.securePaymentStripe}</span>
               </li>
             </ul>
           )}
@@ -133,18 +133,18 @@ export default function Navbar({ variant = "home" }: NavbarProps) {
             <ul className="topbar-nav__list">
               <li>
                 <Link href="/" onClick={close}>
-                  Accueil
+                  {t.navbar.home}
                 </Link>
               </li>
               <li>
-                <span className="topbar-nav__muted">Commande confirmée</span>
+                <span className="topbar-nav__muted">{t.navbar.orderConfirmed}</span>
               </li>
             </ul>
           )}
         </div>
       </nav>
 
-      <nav className="topbar-right" aria-label="Navigation rapide">
+      <nav className="topbar-right" aria-label={t.navbar.navQuickLabel}>
         {variant === "home" && (
           <>
             <a href="#section-2" onClick={(e) => { e.preventDefault(); handleAnchor("#section-2"); }}>{t.navbar.ritual}</a>
@@ -154,12 +154,12 @@ export default function Navbar({ variant = "home" }: NavbarProps) {
         )}
         {variant === "checkout" && (
           <>
-            <Link href="/">← Retour</Link>
-            <span style={{ opacity: 0.55 }}>Paiement sécurisé</span>
+            <Link href="/">{t.navbar.backShort}</Link>
+            <span style={{ opacity: 0.55 }}>{t.navbar.securePayment}</span>
           </>
         )}
         {variant === "thankyou" && (
-          <span style={{ opacity: 0.55 }}>Confirmation</span>
+          <span style={{ opacity: 0.55 }}>{t.navbar.confirmation}</span>
         )}
         <div className="topbar-lang" aria-label="Language switcher">
           <button
@@ -176,6 +176,14 @@ export default function Navbar({ variant = "home" }: NavbarProps) {
             aria-pressed={lang === "en"
           }>
             EN
+          </button>
+          <span className="topbar-lang__sep" aria-hidden="true">/</span>
+          <button
+            className={`topbar-lang__btn${lang === "es" ? " topbar-lang__btn--active" : ""}`}
+            onClick={() => setLang("es")}
+            aria-pressed={lang === "es"}
+          >
+            ES
           </button>
         </div>
       </nav>

@@ -7,8 +7,12 @@ import AuroraBackground from "@/components/AuroraBackground";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollEngine from "@/components/ScrollEngine";
+import { useLanguage } from "@/context/LanguageContext";
 
 function ThankYouContent() {
+  const { t } = useLanguage();
+  const c = t.checkout;
+  const y = t.thankyou;
   const searchParams = useSearchParams();
 
   useEffect(() => {
@@ -39,35 +43,31 @@ function ThankYouContent() {
 
       <main className="ty-shell" data-screen-label="Thank You">
         <div className="crumbs">
-          <span>Panier</span>
+          <span>{c.crumbs[0]}</span>
           <span className="dot">·</span>
-          <span>Paiement</span>
+          <span>{c.crumbs[1]}</span>
           <span className="dot">·</span>
-          <span className="active">Confirmation</span>
+          <span className="active">{c.crumbs[2]}</span>
         </div>
 
         <div className="ty-eyebrow">
           // stripe payment success · session_id present
         </div>
         <div className="ty-eyebrow" style={{ marginTop: 6 }}>
-          § Recovery Ritual™ — Confirmation
+          {y.eyebrow}
         </div>
 
         <h1 className="ty-title reveal">
-          <span className="stagger-child">
-            Bienvenue dans l&apos;expérience METCARE®.
-          </span>
+          <span className="stagger-child">{y.title}</span>
         </h1>
 
         <p className="ty-sub reveal">
-          <span className="stagger-child">
-            Votre Recovery Ritual™ commence maintenant.
-          </span>
+          <span className="stagger-child">{y.subtitle}</span>
         </p>
 
         <div className="ty-grid">
           <article className="ty-card">
-            <h3>Conseils d&apos;utilisation</h3>
+            <h3>{y.usageTipsHeading}</h3>
             <p
               style={{
                 fontSize: 13,
@@ -76,7 +76,7 @@ function ThankYouContent() {
                 marginBottom: 16,
               }}
             >
-              Routine recovery lifestyle.
+              {y.usageTipsBody}
             </p>
             <div className="ph-block">
               <span className="lbl">
@@ -90,7 +90,7 @@ function ThankYouContent() {
           </article>
 
           <article className="ty-card">
-            <h3>Accès accompagnement expert METCARE®</h3>
+            <h3>{y.expertAccessHeading}</h3>
             <p
               style={{
                 fontSize: 13,
@@ -99,8 +99,7 @@ function ThankYouContent() {
                 marginBottom: 16,
               }}
             >
-              Votre lien direct vers l&apos;équipe METCARE® dans les phases de
-              récupération.
+              {y.expertAccessBody}
             </p>
             <div className="ph-block">
               <span className="lbl">// placeholder · access detail pending</span>
@@ -112,14 +111,14 @@ function ThankYouContent() {
           </article>
         </div>
 
-        <section className="ty-order" aria-label="Récapitulatif commande">
-          <h3>Récapitulatif de votre commande</h3>
+        <section className="ty-order" aria-label={y.orderSummaryAriaLabel}>
+          <h3>{y.orderSummaryHeading}</h3>
 
           <div className="row">
             <div>
               <div className="name">SKIN RECOVERY PATCH™</div>
               <div style={{ fontSize: 11, opacity: 0.65, marginTop: 4 }}>
-                Quantité · 1 — METCARE®
+                {y.quantity}
               </div>
             </div>
             <div className="price">// pulled server-side</div>
@@ -129,7 +128,7 @@ function ThankYouContent() {
             <div>
               <div className="name">+ TISSUE REPAIR CREAM™</div>
               <div style={{ fontSize: 11, opacity: 0.65, marginTop: 4 }}>
-                Order bump · ajouté à la commande
+                {y.bumpAdded}
               </div>
             </div>
             <div className="price">// pulled server-side</div>
@@ -137,16 +136,16 @@ function ThankYouContent() {
 
           <div className="row">
             <div>
-              <div className="name">Livraison premium</div>
+              <div className="name">{c.shippingName}</div>
               <div style={{ fontSize: 11, opacity: 0.65, marginTop: 4 }}>
-                Suivi & assistance
+                {c.shippingMeta}
               </div>
             </div>
             <div className="price">// pulled server-side</div>
           </div>
 
           <div className="total">
-            <span className="lbl">Total payé</span>
+            <span className="lbl">{y.totalPaid}</span>
             <span className="amt">// pulled server-side</span>
           </div>
 
@@ -157,13 +156,13 @@ function ThankYouContent() {
 
         <div className="ty-cta-row">
           <a className="cta" href="#" data-href-placeholder="SRP-protocol-url">
-            Découvrir le protocole complet SRP™
+            {y.discoverProtocol}
             <span className="arrow" aria-hidden="true">
               →
             </span>
           </a>
           <Link className="cta ghost" href="/">
-            Retour à l&apos;expérience METCARE®
+            {y.backToExperience}
             <span className="arrow" aria-hidden="true">
               →
             </span>
