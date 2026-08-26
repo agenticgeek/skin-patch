@@ -50,11 +50,11 @@ export default function VisionSection() {
 
           <figure className="section-media section-media--portrait section-media--dark rise-item">
             <div className="section-media__frame">
-              <Image src={img4} alt="Ambiance spa · recovery lifestyle" fill style={{ objectFit: "cover" }} />
+              <Image src={img4} alt={v.mediaTitle} fill style={{ objectFit: "cover" }} />
             </div>
             <figcaption className="section-media__caption">
-              <span className="section-media__label">// Visuel — expérience</span>
-              <span className="section-media__title">Ambiance spa · recovery lifestyle</span>
+              <span className="section-media__label">{v.mediaLabel}</span>
+              <span className="section-media__title">{v.mediaTitle}</span>
             </figcaption>
           </figure>
         </div>

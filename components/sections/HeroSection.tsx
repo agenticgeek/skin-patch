@@ -40,12 +40,12 @@ export default function HeroSection() {
           <HeroStretchTitle />
 
           <p className="hero-eyebrow stagger-child">
-            Recovery Lifestyle Innovation™
+            {h.eyebrow}
           </p>
 
           <figure className="hero-media rise-item" style={{ margin: "2rem 0", width: "100%", height: "500px", borderRadius: "24px", overflow: "hidden" }}>
             <div style={{ position: "relative", width: "100%", height: "100%" }}>
-              <Image src={img4} alt="Recovery lifestyle" fill style={{ objectFit: "cover" }} />
+              <Image src={img4} alt={h.mediaAlt} fill style={{ objectFit: "cover" }} />
             </div>
           </figure>
 
@@ -98,7 +98,7 @@ export default function HeroSection() {
 
           <div className="hero-scroll stagger-child" aria-hidden="true">
             <span className="line" />
-            <span className="label">SCROLL · § II</span>
+            <span className="label">{h.scrollLabel}</span>
           </div>
         </div>
 

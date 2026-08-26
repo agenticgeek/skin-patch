@@ -28,15 +28,15 @@ export default function WhyDifferentSection() {
           <div className="section-media__frame" style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
             <Image
               src={img1}
-              alt="Produit hero · SKIN RECOVERY PATCH™"
+              alt={w.mediaTitle}
               width={400}
               height={520}
               style={{ height: "115%", width: "auto", objectFit: "contain" }}
             />
           </div>
           <figcaption className="section-media__caption">
-            <span className="section-media__label">Visuel — innovation</span>
-            <span className="section-media__title">Produit hero · SKIN RECOVERY PATCH™</span>
+            <span className="section-media__label">{w.mediaLabel}</span>
+            <span className="section-media__title">{w.mediaTitle}</span>
           </figcaption>
         </figure>
 

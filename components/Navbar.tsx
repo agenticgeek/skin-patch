@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { useLanguage } from "@/context/LanguageContext";
 import { trackMetaEvent } from "@/lib/metaPixel";
 
@@ -18,7 +19,7 @@ const trackOrderClick = () =>
   });
 
 export default function Navbar({ variant = "home" }: NavbarProps) {
-  const { lang, setLang, t } = useLanguage();
+  const { t } = useLanguage();
   const [open, setOpen] = useState(false);
 
   const close = useCallback(() => setOpen(false), []);
@@ -141,6 +142,8 @@ export default function Navbar({ variant = "home" }: NavbarProps) {
               </li>
             </ul>
           )}
+
+          <LanguageSwitcher className="topbar-lang--mobile" />
         </div>
       </nav>
 
@@ -161,31 +164,7 @@ export default function Navbar({ variant = "home" }: NavbarProps) {
         {variant === "thankyou" && (
           <span style={{ opacity: 0.55 }}>{t.navbar.confirmation}</span>
         )}
-        <div className="topbar-lang" aria-label="Language switcher">
-          <button
-            className={`topbar-lang__btn${lang === "fr" ? " topbar-lang__btn--active" : ""}`}
-            onClick={() => setLang("fr")}
-            aria-pressed={lang === "fr"}
-          >
-            FR
-          </button>
-          <span className="topbar-lang__sep" aria-hidden="true">/</span>
-          <button
-            className={`topbar-lang__btn${lang === "en" ? " topbar-lang__btn--active" : ""}`}
-            onClick={() => setLang("en")}
-            aria-pressed={lang === "en"
-          }>
-            EN
-          </button>
-          <span className="topbar-lang__sep" aria-hidden="true">/</span>
-          <button
-            className={`topbar-lang__btn${lang === "es" ? " topbar-lang__btn--active" : ""}`}
-            onClick={() => setLang("es")}
-            aria-pressed={lang === "es"}
-          >
-            ES
-          </button>
-        </div>
+        <LanguageSwitcher />
       </nav>
 
       <div

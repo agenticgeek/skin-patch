@@ -20,6 +20,7 @@ export const translations = {
       confirmation: "Confirmation",
     },
     hero: {
+      eyebrow: "Recovery Lifestyle Innovation™",
       rail: ["HYDRATATION", "FRAÎCHEUR", "CONFORT", "RECOVERY RITUAL™"],
       lede: "Inspiré de l’expertise METCARE® du parcours de récupération esthétique, le SKIN RECOVERY PATCH™ accompagne toutes les phases où la peau a besoin de plus de fraîcheur, de confort et d’hydratation.",
       attrsLabel: "Bénéfices clés",
@@ -27,6 +28,30 @@ export const translations = {
       tag: "Parce que votre peau mérite aussi sa récupération.",
       cta: "Commander mes SKIN RECOVERY PATCH™",
       subNote: "Livraison premium — Paiement sécurisé",
+      mediaAlt: "Recovery lifestyle",
+      scrollLabel: "DÉFILER · § II",
+    },
+    marquee: {
+      rowA: [
+        "HYDRATATION",
+        "FRAÎCHEUR",
+        "CONFORT",
+        "RECOVERY RITUAL™",
+        "NIACINAMIDE",
+        "CENTELLA ASIATICA",
+        "SRP™",
+        "METCARE®",
+      ],
+      rowB: [
+        "SKIN RECOVERY PATCH™",
+        "PANTHÉNOL",
+        "ACIDE HYALURONIQUE",
+        "SIGNATURE PROTOCOL™",
+        "RECOVERY LIFESTYLE™",
+        "BÊTA-GLUCAN",
+        "CAFÉINE",
+        "HAMAMÉLIS",
+      ],
     },
     experience: {
       num: "§ 02",
@@ -47,6 +72,8 @@ export const translations = {
         "ou en recherche de fraîcheur et de confort.",
       ],
       quote: "Une nouvelle approche du patch cosmétique pensée autour du Recovery Lifestyle™.",
+      mediaLabel: "// Visuel — expérience recovery",
+      mediaTitle: "Portrait lifestyle · application du patch",
     },
     ritual: {
       num: "§ 03",
@@ -72,6 +99,9 @@ export const translations = {
         { n: "Geste 04", h: "Le geste devient rituel.", v: "Prendre\nsoin de soi." },
       ],
       quote: "Parce que prendre soin de sa peau, c’est aussi prendre soin de soi.",
+      mediaLabel: "// Visuel — le rituel",
+      mediaSecondaryLabel: "// Visuel — gestes",
+      mediaSecondaryTitle: "Macro patch · texture & matière",
     },
     whyDifferent: {
       num: "§ 04",
@@ -91,6 +121,8 @@ export const translations = {
         "Confortable à porter.",
         "Pensé pour accompagner votre peau au quotidien.",
       ],
+      mediaLabel: "// Visuel — innovation",
+      mediaTitle: "Produit hero · SKIN RECOVERY PATCH™",
     },
     formulation: {
       num: "§ 05",
@@ -100,6 +132,7 @@ export const translations = {
       activeLabel: "actif",
       ariaActivesList: "Actifs",
       ariaSynergy: "Synergie",
+      mediaLabel: "// Visuel — formulation",
       mediaTitle: "Texture sérum · actifs en lumière",
       lede: "Chez METCARE®, chaque actif est sélectionné avec une intention précise : accompagner le confort, respecter la peau, et transformer la récupération cutanée en une expérience plus douce et plus humaine.",
       activesLabel: "// Les 8 actifs · SKIN RECOVERY PATCH™",
@@ -115,10 +148,10 @@ export const translations = {
       ],
       synergyIntro: "// Cette synergie a été pensée pour accompagner",
       synergyLines: [
-        "l’hydratation,",
-        "le confort cutané,",
-        "la sensation de fraîcheur,",
-        "et l’expérience recovery lifestyle.",
+        "l’hydratation",
+        "le confort cutané",
+        "la sensation de fraîcheur",
+        "et l’expérience recovery lifestyle",
       ],
     },
     vision: {
@@ -130,6 +163,8 @@ export const translations = {
       cardLabel: "// La vision METCARE®",
       cardTitle: "Une peau plus confortable\ntransforme aussi l’expérience vécue.",
       visionItems: ["plus sensorielle", "plus élégante", "plus confortable", "pensée autour du ressenti"],
+      mediaLabel: "// Visuel — expérience",
+      mediaTitle: "Ambiance spa · recovery lifestyle",
     },
     crossSell: {
       num: "§ 07",
@@ -140,6 +175,8 @@ export const translations = {
       bannerTitle: "Avant, pendant et après votre intervention.",
       bannerBody: "Une stratégie complète de récupération esthétique développée par METCARE® pour accompagner votre corps, votre peau et votre confort à chaque étape du parcours.",
       bannerCta: "Découvrir le protocole",
+      mediaLabel: "// Visuel — protocole",
+      mediaTitle: "Gamme METCARE® · recovery protocol",
       cards: [
         {
           num: "01",
@@ -250,6 +287,7 @@ export const translations = {
       confirmation: "Confirmation",
     },
     hero: {
+      eyebrow: "Recovery Lifestyle Innovation™",
       rail: ["HYDRATION", "FRESHNESS", "COMFORT", "RECOVERY RITUAL™"],
       lede: "Inspired by METCARE®’s expertise in aesthetic recovery, the SKIN RECOVERY PATCH™ supports every phase where skin needs more freshness, comfort and hydration.",
       attrsLabel: "Key benefits",
@@ -257,6 +295,30 @@ export const translations = {
       tag: "Because your skin deserves its recovery too.",
       cta: "Order my SKIN RECOVERY PATCH™",
       subNote: "Premium delivery — Secure payment",
+      mediaAlt: "Recovery lifestyle",
+      scrollLabel: "SCROLL · § II",
+    },
+    marquee: {
+      rowA: [
+        "HYDRATION",
+        "FRESHNESS",
+        "COMFORT",
+        "RECOVERY RITUAL™",
+        "NIACINAMIDE",
+        "CENTELLA ASIATICA",
+        "SRP™",
+        "METCARE®",
+      ],
+      rowB: [
+        "SKIN RECOVERY PATCH™",
+        "PANTHENOL",
+        "HYALURONIC ACID",
+        "SIGNATURE PROTOCOL™",
+        "RECOVERY LIFESTYLE™",
+        "BETA-GLUCAN",
+        "CAFFEINE",
+        "WITCH HAZEL",
+      ],
     },
     experience: {
       num: "§ 02",
@@ -277,6 +339,8 @@ export const translations = {
         "or seeking freshness and comfort.",
       ],
       quote: "A new cosmetic patch approach designed around the Recovery Lifestyle™.",
+      mediaLabel: "// Visual — recovery experience",
+      mediaTitle: "Lifestyle portrait · patch application",
     },
     ritual: {
       num: "§ 03",
@@ -302,6 +366,9 @@ export const translations = {
         { n: "Step 04", h: "The gesture becomes ritual.", v: "Take care\nof yourself." },
       ],
       quote: "Because taking care of your skin is also taking care of yourself.",
+      mediaLabel: "// Visual — the ritual",
+      mediaSecondaryLabel: "// Visual — gestures",
+      mediaSecondaryTitle: "Macro patch · texture & material",
     },
     whyDifferent: {
       num: "§ 04",
@@ -321,6 +388,8 @@ export const translations = {
         "Comfortable to wear.",
         "Designed to support your skin every day.",
       ],
+      mediaLabel: "// Visual — innovation",
+      mediaTitle: "Hero product · SKIN RECOVERY PATCH™",
     },
     formulation: {
       num: "§ 05",
@@ -330,6 +399,7 @@ export const translations = {
       activeLabel: "active",
       ariaActivesList: "Actives",
       ariaSynergy: "Synergy",
+      mediaLabel: "// Visual — formulation",
       mediaTitle: "Serum texture · actives in light",
       lede: "At METCARE®, every active ingredient is selected with a precise intention: to support comfort, respect the skin, and transform skin recovery into a gentler, more human experience.",
       activesLabel: "// The 8 actives · SKIN RECOVERY PATCH™",
@@ -345,10 +415,10 @@ export const translations = {
       ],
       synergyIntro: "// This synergy was designed to support",
       synergyLines: [
-        "hydration,",
-        "skin comfort,",
-        "the sensation of freshness,",
-        "and the recovery lifestyle experience.",
+        "hydration",
+        "skin comfort",
+        "the sensation of freshness",
+        "and the recovery lifestyle experience",
       ],
     },
     vision: {
@@ -360,6 +430,8 @@ export const translations = {
       cardLabel: "// The METCARE® vision",
       cardTitle: "More comfortable skin\nalso transforms the lived experience.",
       visionItems: ["more sensory", "more elegant", "more comfortable", "designed around the feeling"],
+      mediaLabel: "// Visual — experience",
+      mediaTitle: "Spa ambiance · recovery lifestyle",
     },
     crossSell: {
       num: "§ 07",
@@ -370,6 +442,8 @@ export const translations = {
       bannerTitle: "Before, during and after your procedure.",
       bannerBody: "A complete aesthetic recovery strategy developed by METCARE® to support your body, your skin and your comfort at every stage of the journey.",
       bannerCta: "Discover the protocol",
+      mediaLabel: "// Visual — protocol",
+      mediaTitle: "METCARE® range · recovery protocol",
       cards: [
         {
           num: "01",
@@ -480,6 +554,7 @@ export const translations = {
       confirmation: "Confirmación",
     },
     hero: {
+      eyebrow: "Recovery Lifestyle Innovation™",
       rail: ["HIDRATACIÓN", "FRESCOR", "CONFORT", "RECOVERY RITUAL™"],
       lede: "Inspirado en la experiencia de METCARE® en el recorrido de recuperación estética, el SKIN RECOVERY PATCH™ acompaña todas las fases en las que la piel necesita más frescor, confort e hidratación.",
       attrsLabel: "Beneficios clave",
@@ -487,6 +562,30 @@ export const translations = {
       tag: "Porque tu piel también merece su recuperación.",
       cta: "Pedir mi SKIN RECOVERY PATCH™",
       subNote: "Envío premium — Pago seguro",
+      mediaAlt: "Recovery lifestyle",
+      scrollLabel: "DESPLAZAR · § II",
+    },
+    marquee: {
+      rowA: [
+        "HIDRATACIÓN",
+        "FRESCOR",
+        "CONFORT",
+        "RECOVERY RITUAL™",
+        "NIACINAMIDA",
+        "CENTELLA ASIÁTICA",
+        "SRP™",
+        "METCARE®",
+      ],
+      rowB: [
+        "SKIN RECOVERY PATCH™",
+        "PANTENOL",
+        "ÁCIDO HIALURÓNICO",
+        "SIGNATURE PROTOCOL™",
+        "RECOVERY LIFESTYLE™",
+        "BETA-GLUCANO",
+        "CAFEÍNA",
+        "HAMAMELIS",
+      ],
     },
     experience: {
       num: "§ 02",
@@ -507,6 +606,8 @@ export const translations = {
         "o en busca de frescor y confort.",
       ],
       quote: "Un nuevo enfoque del parche cosmético pensado en torno al Recovery Lifestyle™.",
+      mediaLabel: "// Visual — experiencia recovery",
+      mediaTitle: "Retrato lifestyle · aplicación del parche",
     },
     ritual: {
       num: "§ 03",
@@ -532,6 +633,9 @@ export const translations = {
         { n: "Gesto 04", h: "El gesto se convierte en ritual.", v: "Cuidar\nde ti." },
       ],
       quote: "Porque cuidar tu piel es también cuidar de ti.",
+      mediaLabel: "// Visual — el ritual",
+      mediaSecondaryLabel: "// Visual — gestos",
+      mediaSecondaryTitle: "Macro parche · textura y material",
     },
     whyDifferent: {
       num: "§ 04",
@@ -551,6 +655,8 @@ export const translations = {
         "Cómodo de llevar.",
         "Pensado para acompañar tu piel cada día.",
       ],
+      mediaLabel: "// Visual — innovación",
+      mediaTitle: "Producto hero · SKIN RECOVERY PATCH™",
     },
     formulation: {
       num: "§ 05",
@@ -560,6 +666,7 @@ export const translations = {
       activeLabel: "activo",
       ariaActivesList: "Activos",
       ariaSynergy: "Sinergia",
+      mediaLabel: "// Visual — formulación",
       mediaTitle: "Textura sérum · activos en la luz",
       lede: "En METCARE®, cada activo se selecciona con una intención precisa: acompañar el confort, respetar la piel y transformar la recuperación cutánea en una experiencia más suave y más humana.",
       activesLabel: "// Los 8 activos · SKIN RECOVERY PATCH™",
@@ -575,10 +682,10 @@ export const translations = {
       ],
       synergyIntro: "// Esta sinergia fue pensada para acompañar",
       synergyLines: [
-        "la hidratación,",
-        "el confort cutáneo,",
-        "la sensación de frescor,",
-        "y la experiencia recovery lifestyle.",
+        "la hidratación",
+        "el confort cutáneo",
+        "la sensación de frescor",
+        "y la experiencia recovery lifestyle",
       ],
     },
     vision: {
@@ -590,6 +697,8 @@ export const translations = {
       cardLabel: "// La visión METCARE®",
       cardTitle: "Una piel más confortable\ntambién transforma la experiencia vivida.",
       visionItems: ["más sensorial", "más elegante", "más confortable", "pensada en torno a la sensación"],
+      mediaLabel: "// Visual — experiencia",
+      mediaTitle: "Ambiente spa · recovery lifestyle",
     },
     crossSell: {
       num: "§ 07",
@@ -600,6 +709,8 @@ export const translations = {
       bannerTitle: "Antes, durante y después de tu intervención.",
       bannerBody: "Una estrategia completa de recuperación estética desarrollada por METCARE® para acompañar tu cuerpo, tu piel y tu confort en cada etapa del recorrido.",
       bannerCta: "Descubrir el protocolo",
+      mediaLabel: "// Visual — protocolo",
+      mediaTitle: "Gama METCARE® · recovery protocol",
       cards: [
         {
           num: "01",

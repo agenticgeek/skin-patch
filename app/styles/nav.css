@@ -270,3 +270,16 @@ body.nav-open {
 .topbar-lang__btn--active {
   opacity: 1;
 }
+
+.topbar-lang--mobile {
+  margin-top: 28px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(43, 21, 23, 0.1);
+  justify-content: flex-start;
+}
+
+@media (min-width: 900px) {
+  .topbar-lang--mobile {
+    display: none;
+  }
+}

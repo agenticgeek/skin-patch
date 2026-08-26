@@ -65,14 +65,14 @@ export default function ExperienceSection() {
             <div className="section-media__frame">
               <Image
                 src={img3}
-                alt="Portrait lifestyle · application du patch"
+                alt={e.mediaTitle}
                 fill
                 style={{ objectFit: "cover" }}
               />
             </div>
             <figcaption className="section-media__caption">
-              <span className="section-media__label">// Visuel — expérience recovery</span>
-              <span className="section-media__title">Portrait lifestyle · application du patch</span>
+              <span className="section-media__label">{e.mediaLabel}</span>
+              <span className="section-media__title">{e.mediaTitle}</span>
             </figcaption>
           </figure>
         </div>

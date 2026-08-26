@@ -52,11 +52,11 @@ export default function CrossSellSection() {
         <div className="section-stack">
           <figure className="section-media section-media--wide section-media--light rise-item">
             <div className="section-media__frame">
-              <Image src={img3} alt="Gamme METCARE® · recovery protocol" fill style={{ objectFit: "cover" }} />
+              <Image src={img3} alt={c.mediaTitle} fill style={{ objectFit: "cover" }} />
             </div>
             <figcaption className="section-media__caption">
-              <span className="section-media__label">// Visuel — protocole</span>
-              <span className="section-media__title">Gamme METCARE® · recovery protocol</span>
+              <span className="section-media__label">{c.mediaLabel}</span>
+              <span className="section-media__title">{c.mediaTitle}</span>
             </figcaption>
           </figure>
 

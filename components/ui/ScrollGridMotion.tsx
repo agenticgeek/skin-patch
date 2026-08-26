@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { useLanguage } from "@/context/LanguageContext";
 
 const GRID_SELECTOR = "[data-grid-motion]";
 const MARQUEE_SELECTOR = ".grid-motion-marquee";
@@ -396,10 +397,12 @@ export function GridMotionMarquee({
 }
 
 export function GridMotionMarqueeBand() {
+  const { lang, t } = useLanguage();
+
   return (
-    <div className="grid-motion-marquee-band" aria-hidden="true">
-      <GridMotionMarquee direction="left" tone="light" items={MARQUEE_ROW_A} />
-      <GridMotionMarquee direction="right" tone="dark" items={MARQUEE_ROW_B} />
+    <div className="grid-motion-marquee-band" aria-hidden="true" key={lang}>
+      <GridMotionMarquee direction="left" tone="light" items={t.marquee.rowA} />
+      <GridMotionMarquee direction="right" tone="dark" items={t.marquee.rowB} />
     </div>
   );
 }

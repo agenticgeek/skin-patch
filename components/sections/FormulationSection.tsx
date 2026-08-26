@@ -65,7 +65,7 @@ export default function FormulationSection() {
               />
             </div>
             <figcaption className="section-media__caption">
-              <span className="section-media__label">// Visuel — formulation</span>
+              <span className="section-media__label">{f.mediaLabel}</span>
               <span className="section-media__title">{f.mediaTitle}</span>
             </figcaption>
           </figure>

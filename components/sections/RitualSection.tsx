@@ -33,7 +33,7 @@ export default function RitualSection() {
               <Image src={img4} alt={r.stepsTitle} fill style={{ objectFit: "cover" }} />
             </div>
             <figcaption className="section-media__caption">
-              <span className="section-media__label">// Visuel — le rituel</span>
+              <span className="section-media__label">{r.mediaLabel}</span>
               <span className="section-media__title">{r.stepsTitle}</span>
             </figcaption>
           </figure>
@@ -80,11 +80,11 @@ export default function RitualSection() {
 
             <figure className="section-media section-media--square section-media--dark rise-item">
               <div className="section-media__frame">
-                <Image src={img1} alt="Macro patch · texture & matière" fill style={{ objectFit: "cover" }} />
+                <Image src={img1} alt={r.mediaSecondaryTitle} fill style={{ objectFit: "cover" }} />
               </div>
               <figcaption className="section-media__caption">
-                <span className="section-media__label">// Visuel — gestes</span>
-                <span className="section-media__title">Macro patch · texture & matière</span>
+                <span className="section-media__label">{r.mediaSecondaryLabel}</span>
+                <span className="section-media__title">{r.mediaSecondaryTitle}</span>
               </figcaption>
             </figure>
           </div>
